@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Health Diary</string>
+    <string name="weight_tab">Weight</string>
+    <string name="blood_tab">Blood pressure</string>
+    <string name="last_record">Last record:</string>
+    <string name="insert_weight">Weight (kg):</string>
+    <string name="insert_diastolic">Diastolic (mmHg):</string>
+    <string name="insert_systolic">Systolic (mmHg):</string>
+    <string name="weight_hint">78,6</string>
+    <string name="systolic_hint">120</string>
+    <string name="diastolic_hint">80</string>
+    <string name="random_value">Random value</string>
+    <string name="register_values">Register values</string>
+    <string name="registered_weight">Weight registered</string>
+    <string name="pressure_registered">Blood pressure registered</string>
+    <string name="last_record_weight">Last record: Weight</string>
+    <string name="last_record_blood_pressure">Last record: Blood pressure</string>
+    <string name="blood_pressure">Blood pressure (mmHg):</string>
+    <string name="systolic_higher">The introduced systolic value is higher than your average</string>
+    <string name="systolic_lower">The introduced systolic value is lower than your average</string>
+    <string name="diastolic_higher">The introduced diastolic value is higher than your average</string>
+    <string name="diastolic_lower">The introduced diastolic value is lower than your average</string>
+    <string name="weight_higher">The introduced weight is higher than your average</string>
+    <string name="weight_lower">The introduced weight is lower than your average</string>
+    <string name="average_weight">Average weight (kg):</string>
+    <string name="average_diastolic">Average diastolic:</string>
+    <string name="average_systolic">Average systolic:</string>
+
+</resources>
