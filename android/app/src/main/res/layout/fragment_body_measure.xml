@@ -6,91 +6,82 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:padding="8dp"
-    tools:context=".views.BloodPressureFragment">
+    tools:context=".views.BodyMeasureFragment">
 
     <TextView
-        android:id="@+id/insert_diastolic_label"
+        android:id="@+id/insert_weight_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/insert_diastolic"
+        android:text="@string/insert_weight"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/inserted_diastolic"
-        app:layout_constraintEnd_toStartOf="@+id/inserted_diastolic"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/inserted_systolic" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/inserted_weight"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/insert_systolic_label"
+        android:id="@+id/insert_height_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/insert_systolic"
+        android:text="@string/insert_height"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/inserted_systolic"
-        app:layout_constraintEnd_toStartOf="@+id/inserted_systolic"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBaseline_toBaselineOf="@+id/inserted_height"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/inserted_diastolic"
+        android:id="@+id/inserted_weight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/diastolic_hint"
         android:imeOptions="actionNext"
         android:importantForAutofill="no"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/insert_diastolic_label"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/insert_weight_label" />
 
     <EditText
-        android:id="@+id/inserted_systolic"
+        android:id="@+id/inserted_height"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="1dp"
         android:ems="10"
         android:hint="@string/systolic_hint"
         android:imeOptions="actionGo"
         android:importantForAutofill="no"
         android:inputType="number"
-        android:nextFocusForward="@id/register_blood_pressure"
-        app:layout_constraintBaseline_toBaselineOf="@+id/inserted_diastolic"
-        app:layout_constraintEnd_toStartOf="@+id/insert_systolic_label"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/insert_diastolic_label" />
+        android:nextFocusForward="@id/register_body_measure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/insert_height_label"
+        app:layout_constraintStart_toStartOf="@+id/inserted_weight"
+        app:layout_constraintTop_toBottomOf="@+id/inserted_weight" />
 
     <Switch
-        android:id="@+id/random_pressure"
+        android:id="@+id/random_measure"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/random_value"
-        app:layout_constraintBaseline_toBaselineOf="@+id/register_blood_pressure"
-        app:layout_constraintEnd_toStartOf="@+id/register_blood_pressure"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inserted_height" />
 
     <Button
-        android:id="@+id/register_blood_pressure"
+        android:id="@+id/register_body_measure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:enabled="false"
         android:text="@string/register_values"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/random_pressure"
-        app:layout_constraintTop_toBottomOf="@+id/inserted_diastolic" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="393dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/register_body_measure"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -102,31 +93,43 @@
             tools:layout_editor_absoluteY="8dp">
 
             <TextView
-                android:id="@+id/avg_diastolic_description"
+                android:id="@+id/avg_weight_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/average_diastolic"
+                android:text="@string/average_weight"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@+id/avg_systolic_description"
+                app:layout_constraintEnd_toStartOf="@+id/avg_height_description"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/avg_systolic_description"
+                android:id="@+id/avg_height_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/average_systolic"
+                android:text="@string/average_height"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/avg_bmi_description"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/avg_diastolic_description"
+                app:layout_constraintStart_toEndOf="@+id/avg_weight_description"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/avg_diastolic"
+                android:id="@+id/avg_bmi_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/average_bmi"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/avg_height_description"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/avg_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="81dp"
                 android:layout_marginTop="8dp"
@@ -136,13 +139,13 @@
                 android:textColor="@android:color/holo_purple"
                 android:textSize="60sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/avg_diastolic_description"
-                app:layout_constraintStart_toStartOf="@+id/avg_diastolic_description"
-                app:layout_constraintTop_toBottomOf="@+id/avg_diastolic_description"
+                app:layout_constraintEnd_toEndOf="@+id/avg_weight_description"
+                app:layout_constraintStart_toStartOf="@+id/avg_weight_description"
+                app:layout_constraintTop_toBottomOf="@+id/avg_weight_description"
                 tools:text="80" />
 
             <TextView
-                android:id="@+id/avg_systolic"
+                android:id="@+id/avg_height"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -151,10 +154,26 @@
                 android:textColor="@android:color/holo_purple"
                 android:textSize="60sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/avg_systolic_description"
-                app:layout_constraintStart_toStartOf="@+id/avg_systolic_description"
-                app:layout_constraintTop_toBottomOf="@+id/avg_systolic_description"
+                app:layout_constraintEnd_toEndOf="@+id/avg_height_description"
+                app:layout_constraintStart_toStartOf="@+id/avg_height_description"
+                app:layout_constraintTop_toBottomOf="@+id/avg_height_description"
                 tools:text="120" />
+
+            <TextView
+                android:id="@+id/avg_bmi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_purple"
+                android:textSize="60sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/avg_bmi_description"
+                app:layout_constraintStart_toStartOf="@+id/avg_bmi_description"
+                app:layout_constraintTop_toBottomOf="@+id/avg_bmi_description"
+                tools:text="120" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

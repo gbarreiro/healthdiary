@@ -9,14 +9,14 @@ import com.guillermobarreiro.healthdiary.R
 /**
  * Class for managing the two Fragments shown in the MainActivity.
  * In tab 0: BloodPressureFragment
- * In tab 1: WeightFragment
+ * In tab 1: BodyMeasureFragment
  */
 class PageAdapter(fm: FragmentManager, val context: Context): FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         // Returns the desired fragment for each tab
         return when (position){
             0 -> {BloodPressureFragment()}
-            1 -> {WeightFragment()}
+            1 -> {BodyMeasureFragment()}
             else -> Fragment()
         }
     }

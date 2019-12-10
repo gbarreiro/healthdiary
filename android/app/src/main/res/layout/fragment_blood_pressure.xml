@@ -9,16 +9,16 @@
     tools:context=".views.BloodPressureFragment">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/insert_diastolic_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/insert_diastolic"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/inserted_diastolic"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/insert_systolic_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/insert_systolic"
@@ -35,9 +35,9 @@
         android:imeOptions="actionNext"
         android:importantForAutofill="no"
         android:inputType="number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/insert_diastolic_label" />
 
     <EditText
         android:id="@+id/inserted_systolic"
@@ -51,7 +51,7 @@
         android:inputType="number"
         android:nextFocusForward="@id/register_blood_pressure"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/insert_systolic_label"
         app:layout_constraintStart_toStartOf="@+id/inserted_diastolic"
         app:layout_constraintTop_toBottomOf="@+id/inserted_diastolic" />
 

@@ -12,9 +12,9 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.guillermobarreiro.healthdiary.R
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
-import com.guillermobarreiro.healthdiary.database.WeightReading
+import com.guillermobarreiro.healthdiary.database.BodyMeasureReading
 
-class WeightFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
+class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
 
     //region Activity views
     private lateinit var randomSwitch: Switch
@@ -23,7 +23,7 @@ class WeightFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
     private lateinit var averageWeight: TextView
     //endregion
 
-    private lateinit var meanValues: WeightReading
+    private lateinit var meanValues: BodyMeasureReading
     private lateinit var db: HealthDatabase
 
     override fun onCreateView(
@@ -32,7 +32,7 @@ class WeightFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
         savedInstanceState: Bundle?
     ): View? {
         // Inflates the layout for this fragment
-        return inflater.inflate(R.layout.fragment_weight, container, false)
+        return inflater.inflate(R.layout.fragment_body_measure, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,24 +62,24 @@ class WeightFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
 
     // Launched when the "Register value" button is clicked
     private fun registerWeight(){
-        val lastWeight: WeightReading?
+        val lastBodyMeasure: BodyMeasureReading?
         if(randomSwitch.isChecked){
             // Inserts a random weight
-            lastWeight = WeightReading()
+            lastBodyMeasure = BodyMeasureReading()
         }else {
             // Registers the inserted weight
             val myWeight = insertedWeight.text.toString().toFloat()
-            lastWeight = WeightReading(myWeight)
+            lastBodyMeasure = BodyMeasureReading(myWeight)
         }
 
         // Clears the input
         insertedWeight.text.clear()
 
         // Compares the record with the mean
-        val weightComparison = if(lastWeight.weight > meanValues.weight) R.string.weight_higher else R.string.weight_lower
+        val weightComparison = if(lastBodyMeasure.weight > meanValues.weight) R.string.weight_higher else R.string.weight_lower
 
         // Registers the new record in the DB
-        db.insertRecord(lastWeight, HealthDatabase.DatabaseTables.WEIGHT)
+        db.insertRecord(lastBodyMeasure, HealthDatabase.DatabaseTables.WEIGHT)
 
         // Updates the mean values
         updateMean()

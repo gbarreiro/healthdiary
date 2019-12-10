@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import java.util.*
 
-private const val CREATE_WEIGHT_TABLE = "CREATE TABLE ${WeightReading.DatabaseEntry.TABLE_NAME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${WeightReading.DatabaseEntry.COLUMN_WEIGHT} REAL, ${WeightReading.DatabaseEntry.COLUMN_TIMESTAMP} INTEGER)"
+private const val CREATE_WEIGHT_TABLE = "CREATE TABLE ${BodyMeasureReading.DatabaseEntry.TABLE_NAME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${BodyMeasureReading.DatabaseEntry.COLUMN_WEIGHT} REAL, ${BodyMeasureReading.DatabaseEntry.COLUMN_TIMESTAMP} INTEGER)"
 private const val CREATE_BLOOD_PRESSURE_TABLE = "CREATE TABLE ${BloodPressureReading.DatabaseEntry.TABLE_NAME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${BloodPressureReading.DatabaseEntry.COLUMN_SYSTOLIC} INTEGER, ${BloodPressureReading.DatabaseEntry.COLUMN_DIASTOLIC} INTEGER, ${BloodPressureReading.DatabaseEntry.COLUMN_TIMESTAMP} INTEGER)"
 
 /**
@@ -18,7 +18,7 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
      * Names of the two tables existing in the DB
      */
     enum class DatabaseTables(val table: String) {
-        WEIGHT(WeightReading.DatabaseEntry.TABLE_NAME),
+        WEIGHT(BodyMeasureReading.DatabaseEntry.TABLE_NAME),
         BLOOD_PRESSURE(BloodPressureReading.DatabaseEntry.TABLE_NAME)
     }
 
@@ -96,7 +96,7 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
      * Calculates the mean weight value of the readings stored in the DB, and returns it as a new WeightReading object
      * @return WeightReading object with the mean value and the current timestamp
      */
-    fun calculateWeightMean(): WeightReading {
+    fun calculateWeightMean(): BodyMeasureReading {
         val records = getWeightRecords()
         var weight = 0.0
 
@@ -108,24 +108,24 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             weight /= records.size
         }
 
-        return WeightReading(weight.toFloat())
+        return BodyMeasureReading(weight.toFloat())
 
     }
 
     /**
      * Returns an array with all the blood pressure readings stored in the DB
      */
-    fun getWeightRecords(): Array<WeightReading>{
+    fun getWeightRecords(): Array<BodyMeasureReading>{
         val db = this.readableDatabase
         val cursor = db.query(DatabaseTables.WEIGHT.table, null, null, null, null, null, null)
 
         // Iterates through the cursor, for converting each entry into an object and store it into the array
-        val records = mutableListOf<WeightReading>()
+        val records = mutableListOf<BodyMeasureReading>()
         with(cursor){
             while(moveToNext()) {
-                val weight = getFloat(getColumnIndex(WeightReading.DatabaseEntry.COLUMN_WEIGHT))
-                val timestamp = getLong(getColumnIndex(WeightReading.DatabaseEntry.COLUMN_TIMESTAMP))
-                val reading = WeightReading(weight, Date(timestamp))
+                val weight = getFloat(getColumnIndex(BodyMeasureReading.DatabaseEntry.COLUMN_WEIGHT))
+                val timestamp = getLong(getColumnIndex(BodyMeasureReading.DatabaseEntry.COLUMN_TIMESTAMP))
+                val reading = BodyMeasureReading(weight, Date(timestamp))
                 records.add(reading)
             }
         }
