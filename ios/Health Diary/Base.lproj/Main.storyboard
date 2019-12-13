@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,36 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Systolic value (mmHg):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLZ-RB-ozn">
-                                <rect key="frame" x="20" y="69.5" width="185.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diastolic value (mmHg):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8M-dd-Rcv">
-                                <rect key="frame" x="20" y="121.5" width="191.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="120" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-Ya-ZOQ">
-                                <rect key="frame" x="229.5" y="64" width="164.5" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <action selector="inputTextChanged" destination="9pv-A4-QxB" eventType="valueChanged" id="sRf-79-Xsq"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="80" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Pbs-F9-qK4">
-                                <rect key="frame" x="229.5" y="116" width="164.5" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <action selector="inputTextChanged" destination="9pv-A4-QxB" eventType="editingDidEnd" id="cdM-d5-WqB"/>
-                                </connections>
-                            </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="7Lq-t5-R0Z">
-                                <rect key="frame" x="119" y="175" width="176" height="31"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="7Lq-t5-R0Z" userLabel="Random">
+                                <rect key="frame" x="119" y="150" width="176" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Random value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lkn-s1-ber">
                                         <rect key="frame" x="0.0" y="0.0" width="108" height="31"/>
@@ -54,26 +26,26 @@
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="IMH-DT-OkE">
                                         <rect key="frame" x="127" y="0.0" width="51" height="31"/>
+                                        <color key="onTintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="randomSwitchToggled:" destination="9pv-A4-QxB" eventType="valueChanged" id="dTU-T6-VA3"/>
+                                            <action selector="updateUIStatus" destination="9pv-A4-QxB" eventType="valueChanged" id="W44-fO-fuS"/>
                                         </connections>
                                     </switch>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XA-3O-yTu">
-                                <rect key="frame" x="171" y="214" width="72" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XA-3O-yTu">
+                                <rect key="frame" x="171" y="189" width="72" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Register">
-                                    <color key="titleColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                                <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="registerValues" destination="9pv-A4-QxB" eventType="touchUpInside" id="rZD-Xf-HOk"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="W9k-Vn-RVf">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="W9k-Vn-RVf" userLabel="Averages">
                                 <rect key="frame" x="20" y="684" width="374" height="112.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kqd-BU-EYl">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kqd-BU-EYl" userLabel="Systolic">
                                         <rect key="frame" x="0.0" y="0.0" width="172" height="112.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average systolic:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9F0-op-Wl0">
@@ -90,7 +62,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xFz-2D-wdF">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xFz-2D-wdF" userLabel="Diastolic">
                                         <rect key="frame" x="202" y="0.0" width="172" height="112.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average diastolic:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJl-Fw-REA">
@@ -109,27 +81,61 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="rMv-ov-JFW" userLabel="Inputs">
+                                <rect key="frame" x="76.5" y="44" width="261" height="86"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Aa5-nz-4hb" userLabel="Systolic">
+                                        <rect key="frame" x="0.0" y="0.0" width="261" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Systolic value (mmHg):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLZ-RB-ozn">
+                                                <rect key="frame" x="0.0" y="0.0" width="185.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="120" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-Ya-ZOQ">
+                                                <rect key="frame" x="209.5" y="0.0" width="51.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="updateUIStatus" destination="9pv-A4-QxB" eventType="editingChanged" id="FpO-uP-OuR"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="rV4-PG-d2F" userLabel="Diastolic">
+                                        <rect key="frame" x="0.0" y="52" width="261" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diastolic value (mmHg):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8M-dd-Rcv">
+                                                <rect key="frame" x="0.0" y="0.0" width="191.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="80" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Pbs-F9-qK4">
+                                                <rect key="frame" x="209.5" y="0.0" width="51.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="updateUIStatus" destination="9pv-A4-QxB" eventType="editingChanged" id="Ed6-e0-r3G"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="7Lq-t5-R0Z" firstAttribute="centerX" secondItem="PQr-Ze-W5v" secondAttribute="centerX" id="9fk-Tp-7nD"/>
-                            <constraint firstItem="H8M-dd-Rcv" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="20" id="ANC-ek-DVL"/>
-                            <constraint firstItem="ZK2-Ya-ZOQ" firstAttribute="leading" secondItem="gLZ-RB-ozn" secondAttribute="trailing" constant="24" id="CDX-8b-nJO"/>
+                            <constraint firstItem="7Lq-t5-R0Z" firstAttribute="top" secondItem="rMv-ov-JFW" secondAttribute="bottom" constant="20" id="E2V-os-h7K"/>
+                            <constraint firstItem="rMv-ov-JFW" firstAttribute="centerX" secondItem="PQr-Ze-W5v" secondAttribute="centerX" id="Gcy-b1-D1d"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="W9k-Vn-RVf" secondAttribute="trailing" constant="20" id="JgT-vg-dKI"/>
-                            <constraint firstItem="ZK2-Ya-ZOQ" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="20" id="LCb-b0-Nrp"/>
-                            <constraint firstItem="Pbs-F9-qK4" firstAttribute="leading" secondItem="H8M-dd-Rcv" secondAttribute="trailing" constant="18" id="Ltf-4h-U1v"/>
-                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="Pbs-F9-qK4" secondAttribute="trailing" constant="20" id="NIW-c5-4AD"/>
-                            <constraint firstItem="gLZ-RB-ozn" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="20" id="PPQ-bo-xVK"/>
                             <constraint firstItem="5XA-3O-yTu" firstAttribute="top" secondItem="Lkn-s1-ber" secondAttribute="bottom" constant="8" id="QU3-ik-Wka"/>
-                            <constraint firstItem="gLZ-RB-ozn" firstAttribute="firstBaseline" secondItem="ZK2-Ya-ZOQ" secondAttribute="firstBaseline" id="Ysh-5u-le3"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="W9k-Vn-RVf" secondAttribute="bottom" constant="16.5" id="Yue-0Y-srJ"/>
-                            <constraint firstItem="Pbs-F9-qK4" firstAttribute="top" secondItem="ZK2-Ya-ZOQ" secondAttribute="bottom" constant="18" id="ZNY-tT-lM9"/>
                             <constraint firstItem="5XA-3O-yTu" firstAttribute="centerX" secondItem="PQr-Ze-W5v" secondAttribute="centerX" id="fdv-3t-uDl"/>
-                            <constraint firstItem="7Lq-t5-R0Z" firstAttribute="top" secondItem="Pbs-F9-qK4" secondAttribute="bottom" constant="25" id="h0E-Jc-2pD"/>
                             <constraint firstItem="W9k-Vn-RVf" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="20" id="oTM-SQ-zVd"/>
-                            <constraint firstItem="H8M-dd-Rcv" firstAttribute="firstBaseline" secondItem="Pbs-F9-qK4" secondAttribute="firstBaseline" id="rvk-PU-cEi"/>
-                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="ZK2-Ya-ZOQ" secondAttribute="trailing" constant="20" id="sk1-O7-MYf"/>
-                            <constraint firstItem="ZK2-Ya-ZOQ" firstAttribute="leading" secondItem="Pbs-F9-qK4" secondAttribute="leading" id="v4o-SX-1cx"/>
+                            <constraint firstItem="rMv-ov-JFW" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="u8f-8d-Cfn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
@@ -137,6 +143,8 @@
                     <connections>
                         <outlet property="diastolicAverage" destination="nnL-Bk-fKt" id="Q2Y-Qz-PfI"/>
                         <outlet property="diastolicInput" destination="Pbs-F9-qK4" id="NNj-As-eIR"/>
+                        <outlet property="randomSwitch" destination="IMH-DT-OkE" id="bpt-lr-jYr"/>
+                        <outlet property="registerButton" destination="5XA-3O-yTu" id="9qc-Ja-t3m"/>
                         <outlet property="systolicAverage" destination="iCM-ld-W76" id="s2m-Dt-AB4"/>
                         <outlet property="systolicInput" destination="ZK2-Ya-ZOQ" id="HDW-Wm-GIj"/>
                     </connections>
@@ -169,6 +177,8 @@
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
