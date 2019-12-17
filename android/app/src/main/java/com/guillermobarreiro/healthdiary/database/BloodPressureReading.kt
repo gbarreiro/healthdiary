@@ -8,6 +8,15 @@ import kotlin.random.Random
 
 data class BloodPressureReading(val systolic: Int, val diastolic: Int, val timestamp: Date): DatabaseEntity {
 
+    enum class RiskLevel {NORMAL, ELEVATED, HIGH, HYPERTENSIVE}
+
+    val riskLevel = when {
+        systolic < 120 && diastolic < 80 -> RiskLevel.NORMAL
+        systolic < 129  && diastolic < 80 -> RiskLevel.ELEVATED
+        systolic < 180 || diastolic < 120 -> RiskLevel.HIGH
+        else -> RiskLevel.HYPERTENSIVE
+    }
+
     /**
      * Object representation as a ContentValues key-value dictionary
      */
