@@ -24,10 +24,10 @@
     <string name="diastolic_lower">The introduced diastolic value is lower than your average</string>
     <string name="weight_higher">The introduced weight is higher than your average</string>
     <string name="weight_lower">The introduced weight is lower than your average</string>
-    <string name="average_weight">Average weight (kg):</string>
-    <string name="average_diastolic">Average diastolic:</string>
-    <string name="average_systolic">Average systolic:</string>
-    <string name="average_height">Average height (cm):</string>
-    <string name="average_bmi">Average BMI:</string>
+    <string name="average_weight">Avg weight (kg):</string>
+    <string name="average_diastolic">Avg diastolic:</string>
+    <string name="average_systolic">Avg systolic:</string>
+    <string name="average_height">Avg height (cm):</string>
+    <string name="average_bmi">Avg BMI:</string>
 
 </resources>

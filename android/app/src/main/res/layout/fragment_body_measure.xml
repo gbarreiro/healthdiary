@@ -99,9 +99,9 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/average_weight"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@+id/avg_height_description"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/avg_weight"
+                app:layout_constraintEnd_toEndOf="@+id/avg_weight"
+                app:layout_constraintStart_toStartOf="@+id/avg_weight"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -111,10 +111,63 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/average_height"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@id/avg_bmi_description"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/avg_weight_description"
+                app:layout_constraintBottom_toTopOf="@+id/avg_height"
+                app:layout_constraintEnd_toEndOf="@+id/avg_height"
+                app:layout_constraintHorizontal_bias="0.473"
+                app:layout_constraintStart_toStartOf="@+id/avg_height"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/avg_height"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_purple"
+                android:textSize="60sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/avg_bmi"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/avg_weight"
+                app:layout_constraintTop_toBottomOf="@+id/avg_height_description"
+                tools:text="60" />
+
+            <TextView
+                android:id="@+id/avg_weight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/holo_purple"
+                android:textSize="60sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/avg_height"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/avg_weight_description"
+                tools:text="80" />
+
+            <TextView
+                android:id="@+id/avg_bmi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_purple"
+                android:textSize="60sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/avg_height"
+                app:layout_constraintTop_toBottomOf="@+id/avg_bmi_description"
+                app:layout_constraintVertical_bias="1.0"
+                tools:text="40" />
 
             <TextView
                 android:id="@+id/avg_bmi_description"
@@ -123,56 +176,10 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/average_bmi"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/avg_height_description"
+                app:layout_constraintBottom_toTopOf="@+id/avg_bmi"
+                app:layout_constraintEnd_toEndOf="@+id/avg_bmi"
+                app:layout_constraintStart_toStartOf="@+id/avg_bmi"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/avg_weight"
-                android:layout_width="wrap_content"
-                android:layout_height="81dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/holo_purple"
-                android:textSize="60sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/avg_weight_description"
-                app:layout_constraintStart_toStartOf="@+id/avg_weight_description"
-                app:layout_constraintTop_toBottomOf="@+id/avg_weight_description"
-                tools:text="80" />
-
-            <TextView
-                android:id="@+id/avg_height"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/holo_purple"
-                android:textSize="60sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/avg_height_description"
-                app:layout_constraintStart_toStartOf="@+id/avg_height_description"
-                app:layout_constraintTop_toBottomOf="@+id/avg_height_description"
-                tools:text="120" />
-
-            <TextView
-                android:id="@+id/avg_bmi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:textAlignment="center"
-                android:textColor="@android:color/holo_purple"
-                android:textSize="60sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/avg_bmi_description"
-                app:layout_constraintStart_toStartOf="@+id/avg_bmi_description"
-                app:layout_constraintTop_toBottomOf="@+id/avg_bmi_description"
-                tools:text="120" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
