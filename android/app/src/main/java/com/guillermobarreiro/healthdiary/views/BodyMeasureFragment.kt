@@ -19,12 +19,20 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
     //region Activity views
     private lateinit var randomSwitch: Switch
     private lateinit var insertedWeight: EditText
+    private lateinit var insertedHeight: EditText
     private lateinit var registerButton: Button
     private lateinit var averageWeight: TextView
+    private lateinit var averageHeight: TextView
+    private lateinit var averageBmi: TextView
     //endregion
 
-    private lateinit var meanValues: BodyMeasureReading
+    //region Datasources
+    private var meanValues: BodyMeasureReading? = null
     private lateinit var db: HealthDatabase
+    //endregion
+
+    private val riskColors = mutableMapOf<BodyMeasureReading.BMILevel, Int>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +47,19 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
         super.onViewCreated(view, savedInstanceState)
 
         // Sets up the view
-        randomSwitch = view.findViewById(R.id.random_weight)
+        randomSwitch = view.findViewById(R.id.random_measure)
         insertedWeight = view.findViewById(R.id.inserted_weight)
-        registerButton = view.findViewById(R.id.register_weight)
+        insertedHeight = view.findViewById(R.id.inserted_height)
+        registerButton = view.findViewById(R.id.register_body_measure)
         averageWeight = view.findViewById(R.id.avg_weight)
+        averageHeight = view.findViewById(R.id.avg_height)
+        averageBmi = view.findViewById(R.id.avg_bmi)
+
+        // Sets up the risk colors dictionary
+        riskColors[BodyMeasureReading.BMILevel.UNDERWEIGHT] = resources.getColor(android.R.color.holo_orange_dark)
+        riskColors[BodyMeasureReading.BMILevel.HEALTHY] = resources.getColor(android.R.color.holo_green_dark)
+        riskColors[BodyMeasureReading.BMILevel.OVERWEIGHT] = resources.getColor(android.R.color.holo_orange_dark)
+        riskColors[BodyMeasureReading.BMILevel.OBESE] = resources.getColor(android.R.color.holo_red_dark)
 
         // Sets the onClick listeners
         registerButton.setOnClickListener { this.registerWeight() }
@@ -69,14 +86,21 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
         }else {
             // Registers the inserted weight
             val myWeight = insertedWeight.text.toString().toFloat()
-            lastBodyMeasure = BodyMeasureReading(myWeight)
+            val myHeight = insertedHeight.text.toString().toInt()
+            lastBodyMeasure = BodyMeasureReading(myWeight, myHeight)
         }
 
         // Clears the input
         insertedWeight.text.clear()
+        insertedHeight.text.clear()
 
         // Compares the record with the mean
-        val weightComparison = if(lastBodyMeasure.weight > meanValues.weight) R.string.weight_higher else R.string.weight_lower
+        if(meanValues != null){
+            val weightComparison = if(lastBodyMeasure.weight > meanValues!!.weight) R.string.weight_higher else R.string.weight_lower
+
+            // Notifies the user about the comparison of the introduced weight with the average
+            Toast.makeText(context, weightComparison, Toast.LENGTH_LONG).show()
+        }
 
         // Registers the new record in the DB
         db.insertRecord(lastBodyMeasure, HealthDatabase.DatabaseTables.WEIGHT)
@@ -84,14 +108,21 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
         // Updates the mean values
         updateMean()
 
-        // Notifies the user about the comparison of the introduced weight with the average
-        Toast.makeText(context, weightComparison, Toast.LENGTH_LONG).show()
+
     }
 
     private fun updateMean(){
-        meanValues = db.calculateWeightMean()
-        val avgWeight = if(meanValues.weight > 0) "%.2f".format(meanValues.weight) else "–"
-        averageWeight.text = avgWeight
+        meanValues = db.calculateBodyMeasureMean()
+        if(meanValues!=null){
+            val avgWeight = "%.1f".format(meanValues!!.weight)
+            val avgHeight = meanValues!!.height.toString()
+            val avgBmi = "%.1f".format(meanValues!!.bmi)
+            val bmiColor = riskColors[meanValues!!.bmiLevel] ?: resources.getColor(android.R.color.holo_purple)
+            averageWeight.text = avgWeight
+            averageHeight.text = avgHeight
+            averageBmi.text = avgBmi
+            averageBmi.setTextColor(bmiColor)
+        }
 
     }
 

@@ -26,10 +26,12 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
     private lateinit var averageSystolic: TextView
     //endregion
 
-    // region Data
-    private lateinit var meanValues: BloodPressureReading
+    // region Datasources
+    private var meanValues: BloodPressureReading? = null
     private lateinit var db: HealthDatabase
     //endregion
+
+    private val riskColors = mutableMapOf<BloodPressureReading.RiskLevel, Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +52,12 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         registerButton = view.findViewById(R.id.register_blood_pressure)
         averageDiastolic = view.findViewById(R.id.avg_diastolic)
         averageSystolic = view.findViewById(R.id.avg_systolic)
+
+        // Sets up the risk colors dictionary
+        riskColors[BloodPressureReading.RiskLevel.NORMAL] = resources.getColor(android.R.color.holo_green_dark)
+        riskColors[BloodPressureReading.RiskLevel.ELEVATED] = resources.getColor(android.R.color.holo_orange_light)
+        riskColors[BloodPressureReading.RiskLevel.HIGH] = resources.getColor(android.R.color.holo_orange_dark)
+        riskColors[BloodPressureReading.RiskLevel.HYPERTENSIVE] = resources.getColor(android.R.color.holo_red_dark)
 
         // Sets up the onClick listeners
         randomSwitch.setOnClickListener { this.switchChanged() }
@@ -87,28 +95,27 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         insertedDiastolic.text.clear()
         insertedSystolic.text.clear()
 
-        // Compares the record with the mean
-        val systolicComparison = if(lastBloodPressure.systolic > meanValues.systolic) R.string.systolic_higher else R.string.systolic_lower
-        val diastolicComparison = if(lastBloodPressure.diastolic > meanValues.diastolic) R.string.diastolic_higher else R.string.diastolic_lower
-        val completeComparison = "${resources.getString(systolicComparison)}\n${resources.getString(diastolicComparison)}"
-
         // Registers the new record in the DB
         db.insertRecord(lastBloodPressure, HealthDatabase.DatabaseTables.BLOOD_PRESSURE)
 
         // Updates the mean values
         updateMean()
 
-        // Notifies the user about the comparison of the introduced values with the average
-        Toast.makeText(context, completeComparison, Toast.LENGTH_LONG).show()
-
     }
 
     private fun updateMean(){
-        meanValues = db.calculateBloodPressureMean()
-        val avgSystolic = if(meanValues.systolic > 0) meanValues.systolic.toString() else "–"
-        val avgDiastolic = if(meanValues.diastolic > 0) meanValues.diastolic.toString() else "–"
-        averageSystolic.text = avgSystolic
-        averageDiastolic.text = avgDiastolic
+        this.meanValues = db.calculateBloodPressureMean()
+        if(this.meanValues!=null){
+            val avgSystolic = meanValues!!.systolic.toString()
+            val avgDiastolic = meanValues!!.diastolic.toString()
+            val riskColor = riskColors[meanValues!!.riskLevel] ?: resources.getColor(android.R.color.holo_purple)
+            averageSystolic.text = avgSystolic
+            averageDiastolic.text = avgDiastolic
+            averageDiastolic.setTextColor(riskColor)
+            averageSystolic.setTextColor(riskColor)
+        }
+
+
     }
 
     // Launched when the "random values" switch is toggled

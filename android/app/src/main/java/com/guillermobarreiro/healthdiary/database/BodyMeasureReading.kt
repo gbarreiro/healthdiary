@@ -81,7 +81,7 @@ class BodyMeasureReading(val weight: Float, val height: Int, val timestamp: Date
      * Contract for transforming the weight readings from and into the database
      */
     object DatabaseEntry: BaseColumns {
-        const val TABLE_NAME = "weight"
+        const val TABLE_NAME = "body_measures"
         const val COLUMN_WEIGHT = "weight"
         const val COLUMN_HEIGHT = "height"
         const val COLUMN_TIMESTAMP = "timestamp"

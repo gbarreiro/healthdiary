@@ -5,6 +5,7 @@
     <string name="last_record">Last record:</string>
     <string name="insert_weight">Weight (kg):</string>
     <string name="insert_height">Height (cm):</string>
+    <string name="empty_value">–</string>
     <string name="insert_diastolic">Diastolic (mmHg):</string>
     <string name="insert_systolic">Systolic (mmHg):</string>
     <string name="weight_hint">78,6</string>
@@ -18,10 +19,6 @@
     <string name="last_record_weight">Last record: Weight</string>
     <string name="last_record_blood_pressure">Last record: Blood pressure</string>
     <string name="blood_pressure">Blood pressure (mmHg):</string>
-    <string name="systolic_higher">The introduced systolic value is higher than your average</string>
-    <string name="systolic_lower">The introduced systolic value is lower than your average</string>
-    <string name="diastolic_higher">The introduced diastolic value is higher than your average</string>
-    <string name="diastolic_lower">The introduced diastolic value is lower than your average</string>
     <string name="weight_higher">The introduced weight is higher than your average</string>
     <string name="weight_lower">The introduced weight is lower than your average</string>
     <string name="average_weight">Avg weight (kg):</string>
