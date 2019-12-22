@@ -52,6 +52,27 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		990CE3FA23AFBA570043B96A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9948594D23A02AC40041C3F9 /* Main.storyboard */,
+				9948595023A02AC50041C3F9 /* Assets.xcassets */,
+				9948595223A02AC50041C3F9 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		990CE3FB23AFBA680043B96A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9948594523A02AC40041C3F9 /* AppDelegate.swift */,
+				9948594723A02AC40041C3F9 /* SceneDelegate.swift */,
+				9948594923A02AC40041C3F9 /* BloodPressureViewController.swift */,
+				9948594B23A02AC40041C3F9 /* BodyMeasuresViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		9948593923A02AC40041C3F9 = {
 			isa = PBXGroup;
 			children = (
@@ -71,15 +92,10 @@
 		9948594423A02AC40041C3F9 /* Health Diary */ = {
 			isa = PBXGroup;
 			children = (
-				990CE3F523AFB3D30043B96A /* Model */,
-				9948594523A02AC40041C3F9 /* AppDelegate.swift */,
-				9948594723A02AC40041C3F9 /* SceneDelegate.swift */,
-				9948594923A02AC40041C3F9 /* BloodPressureViewController.swift */,
-				9948594B23A02AC40041C3F9 /* BodyMeasuresViewController.swift */,
-				9948594D23A02AC40041C3F9 /* Main.storyboard */,
-				9948595023A02AC50041C3F9 /* Assets.xcassets */,
-				9948595223A02AC50041C3F9 /* LaunchScreen.storyboard */,
 				9948595523A02AC50041C3F9 /* Info.plist */,
+				990CE3F523AFB3D30043B96A /* Model */,
+				990CE3FA23AFBA570043B96A /* View */,
+				990CE3FB23AFBA680043B96A /* Controller */,
 			);
 			path = "Health Diary";
 			sourceTree = "<group>";
