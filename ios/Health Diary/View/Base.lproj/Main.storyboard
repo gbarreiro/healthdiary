@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="7Lq-t5-R0Z" userLabel="Random">
-                                <rect key="frame" x="119" y="150" width="176" height="31"/>
+                                <rect key="frame" x="119" y="166" width="176" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Random value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lkn-s1-ber">
                                         <rect key="frame" x="0.0" y="0.0" width="108" height="31"/>
@@ -34,7 +34,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XA-3O-yTu">
-                                <rect key="frame" x="171" y="189" width="72" height="36"/>
+                                <rect key="frame" x="171" y="205" width="72" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Register"/>
@@ -57,7 +57,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="–" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCM-ld-W76">
                                                 <rect key="frame" x="68.5" y="28.5" width="35.5" height="84"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -74,7 +74,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="–" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnL-Bk-fKt">
                                                 <rect key="frame" x="0.0" y="28.5" width="172" height="84"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="70"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -82,7 +82,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="rMv-ov-JFW" userLabel="Inputs">
-                                <rect key="frame" x="76.5" y="44" width="261" height="86"/>
+                                <rect key="frame" x="76.5" y="60" width="261" height="86"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Aa5-nz-4hb" userLabel="Systolic">
                                         <rect key="frame" x="0.0" y="0.0" width="261" height="34"/>
@@ -99,6 +99,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="updateUIStatus" destination="9pv-A4-QxB" eventType="editingChanged" id="FpO-uP-OuR"/>
+                                                    <outlet property="delegate" destination="9pv-A4-QxB" id="gBT-YT-w5V"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -118,11 +119,13 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="updateUIStatus" destination="9pv-A4-QxB" eventType="editingChanged" id="Ed6-e0-r3G"/>
+                                                    <outlet property="delegate" destination="9pv-A4-QxB" id="zyi-mv-lOq"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <variation key="widthClass=regular" axis="horizontal"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -135,11 +138,11 @@
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="W9k-Vn-RVf" secondAttribute="bottom" constant="16.5" id="Yue-0Y-srJ"/>
                             <constraint firstItem="5XA-3O-yTu" firstAttribute="centerX" secondItem="PQr-Ze-W5v" secondAttribute="centerX" id="fdv-3t-uDl"/>
                             <constraint firstItem="W9k-Vn-RVf" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="20" id="oTM-SQ-zVd"/>
-                            <constraint firstItem="rMv-ov-JFW" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="u8f-8d-Cfn"/>
+                            <constraint firstItem="rMv-ov-JFW" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="16" id="u8f-8d-Cfn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Blood Pressure" image="heart" catalog="system" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Blood Pressure" image="heart" catalog="system" selectedImage="heart.fill" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="diastolicAverage" destination="nnL-Bk-fKt" id="Q2Y-Qz-PfI"/>
                         <outlet property="diastolicInput" destination="Pbs-F9-qK4" id="NNj-As-eIR"/>
@@ -163,7 +166,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Height &amp; Weight" image="person.fill" catalog="system" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Height &amp; Weight" image="person.fill" catalog="system" selectedImage="person.fill" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -192,6 +195,7 @@
     </scenes>
     <resources>
         <image name="heart" catalog="system" width="64" height="54"/>
+        <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>

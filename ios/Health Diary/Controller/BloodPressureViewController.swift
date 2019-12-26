@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BloodPressureViewController: UIViewController {
+class BloodPressureViewController: UIViewController, UITextFieldDelegate {
     
     // Colors for the average values, depending on the risk level
     private static let riskColors: [BloodPressureReading.RiskLevel: UIColor] = [
@@ -55,14 +55,20 @@ class BloodPressureViewController: UIViewController {
         if(randomSwitch.isOn){
             // Random values for the blood pressure reading
             reading = BloodPressureReading(timestamp: Date())
+            print("Random value\nSystolic: \(String(describing: reading!.systolic)). Diastolic: \(String(describing: reading!.diastolic))")
         } else{
             // User introduced values for the blood pressure reading
             if let systolic = Int(systolicInput.text!), let diastolic = Int(diastolicInput.text!){
                 if systolic > 0 && diastolic > 0 {
                     // Introduced systolic and diastolic values are positive integers
                     reading = BloodPressureReading(systolic: systolic, diastolic: diastolic, timestamp: Date())
+                    print("Inserted value\nSystolic: \(String(describing: reading!.systolic)). Diastolic: \(String(describing: reading!.diastolic))")
                 }
             }
+            
+            // Clears the text inputs
+            systolicInput.text = ""
+            diastolicInput.text = ""
         }
 
         // Registers the reading in the array
@@ -80,6 +86,14 @@ class BloodPressureViewController: UIViewController {
 
     }
     
+    // Avoids the typing of non-digit characters in the input text fields and of too big numbers
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) != nil && string.count <= 3 {
+            return true
+       } else {
+            return false
+        }
+    }
     
     // MARK: ViewController lifecycle methods
     override func viewDidLoad() {
