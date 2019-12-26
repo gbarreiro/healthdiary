@@ -10,6 +10,14 @@ import UIKit
 
 class BloodPressureViewController: UIViewController {
     
+    // Colors for the average values, depending on the risk level
+    private static let riskColors: [BloodPressureReading.RiskLevel: UIColor] = [
+        BloodPressureReading.RiskLevel.NORMAL: UIColor.green,
+        BloodPressureReading.RiskLevel.ELEVATED: UIColor.yellow,
+        BloodPressureReading.RiskLevel.HIGH: UIColor.orange,
+        BloodPressureReading.RiskLevel.HYPERTENSIVE: UIColor.red
+    ]
+    
     // MARK: UIOutlets
     @IBOutlet weak var systolicInput: UITextField!
     @IBOutlet weak var diastolicInput: UITextField!
@@ -17,6 +25,9 @@ class BloodPressureViewController: UIViewController {
     @IBOutlet weak var diastolicAverage: UILabel!
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var randomSwitch: UISwitch!
+    
+    // MARK: Data sources
+    private var records: [BloodPressureReading] = []
     
     // MARK: UIActions
     @IBAction func updateUIStatus() {
@@ -36,10 +47,39 @@ class BloodPressureViewController: UIViewController {
         }
         
     }
+
     
     @IBAction func registerValues() {
-        // TODO: Register values 
+        var reading: BloodPressureReading?
+        
+        if(randomSwitch.isOn){
+            // Random values for the blood pressure reading
+            reading = BloodPressureReading(timestamp: Date())
+        } else{
+            // User introduced values for the blood pressure reading
+            if let systolic = Int(systolicInput.text!), let diastolic = Int(diastolicInput.text!){
+                if systolic > 0 && diastolic > 0 {
+                    // Introduced systolic and diastolic values are positive integers
+                    reading = BloodPressureReading(systolic: systolic, diastolic: diastolic, timestamp: Date())
+                }
+            }
+        }
+
+        // Registers the reading in the array
+        if let reading = reading{
+            records.append(reading)
+            
+            // Update the average values
+            let averageValues = BloodPressureReading(records: records)
+            let riskColor = BloodPressureViewController.riskColors[averageValues.riskLevel]
+            systolicAverage.text = String(averageValues.systolic)
+            diastolicAverage.text = String(averageValues.diastolic)
+            systolicAverage.textColor = riskColor
+            diastolicAverage.textColor = riskColor
+        }
+
     }
+    
     
     // MARK: ViewController lifecycle methods
     override func viewDidLoad() {
