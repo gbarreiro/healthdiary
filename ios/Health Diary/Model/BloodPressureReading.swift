@@ -8,17 +8,18 @@
 
 import Foundation
 
-enum RiskLevel {
-    case NORMAL
-    case ELEVATED
-    case HIGH
-    case HYPERTENSIVE
-}
 
 /**
     Represents a blood pressure reading, this means, the sampling of the user's systolic and diastolic blood pressure values in a specific moment. Both systolic and diastolic values are stored as Integer values, expressed in mmHg
 */
 class BloodPressureReading {
+    enum RiskLevel {
+        case NORMAL
+        case ELEVATED
+        case HIGH
+        case HYPERTENSIVE
+    }
+    
     let systolic: Int!
     let diastolic: Int!
     let timestamp: Date!

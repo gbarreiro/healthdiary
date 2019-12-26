@@ -8,17 +8,17 @@
 
 import Foundation
 
-enum BMILevel {
-    case UNDERWEIGHT
-    case HEALTHY
-    case OVERWEIGHT
-    case OBESE
-}
-
 /**
     Represents a body measure reading, this means, the sampling of the user's weight and height in a specific moment. The weight is stored as a decimal number in kg, and the height as an integer in cm.
 */
 class BodyMeasureReading {
+    enum BMILevel {
+        case UNDERWEIGHT
+        case HEALTHY
+        case OVERWEIGHT
+        case OBESE
+    }
+    
     let weight: Float!
     let height: Int!
     let timestamp: Date!
