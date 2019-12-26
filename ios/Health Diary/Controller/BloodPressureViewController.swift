@@ -88,11 +88,15 @@ class BloodPressureViewController: UIViewController, UITextFieldDelegate {
     
     // Avoids the typing of non-digit characters in the input text fields and of too big numbers
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) != nil && string.count <= 3 {
+        
+        // Handle backspace/delete
+        guard !string.isEmpty else {
+            // Backspace detected, allow text change, no need to process the text any further
             return true
-       } else {
-            return false
         }
+        
+        return string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) != nil && textField.text!.count < 3
+        
     }
     
     // MARK: ViewController lifecycle methods
