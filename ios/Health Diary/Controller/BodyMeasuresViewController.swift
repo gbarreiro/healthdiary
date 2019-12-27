@@ -11,7 +11,7 @@ import UIKit
 class BodyMeasuresViewController: UIViewController, UITextFieldDelegate {
     
     // Colors for the BMI values, depending on the risk level
-    private static let riskColors: [BodyMeasureReading.BMILevel: UIColor] = [
+    public static let riskColors: [BodyMeasureReading.BMILevel: UIColor] = [
         BodyMeasureReading.BMILevel.HEALTHY: UIColor.green,
         BodyMeasureReading.BMILevel.UNDERWEIGHT: UIColor.orange,
         BodyMeasureReading.BMILevel.OVERWEIGHT: UIColor.orange,

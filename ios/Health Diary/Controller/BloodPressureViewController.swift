@@ -11,7 +11,7 @@ import UIKit
 class BloodPressureViewController: UIViewController, UITextFieldDelegate {
     
     // Colors for the average values, depending on the risk level
-    private static let riskColors: [BloodPressureReading.RiskLevel: UIColor] = [
+    public static let riskColors: [BloodPressureReading.RiskLevel: UIColor] = [
         BloodPressureReading.RiskLevel.NORMAL: UIColor.green,
         BloodPressureReading.RiskLevel.ELEVATED: UIColor.yellow,
         BloodPressureReading.RiskLevel.HIGH: UIColor.orange,
@@ -103,6 +103,14 @@ class BloodPressureViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showBloodPressureRecords" {
+            // Sends the array with the blood pressure records to the detail view controller
+            let destinationVC = segue.destination as! BloodPressureDetailViewController
+            destinationVC.records = self.records
+        }
     }
     
 }

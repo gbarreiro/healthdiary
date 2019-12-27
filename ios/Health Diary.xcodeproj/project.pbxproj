@@ -16,6 +16,8 @@
 		9948594F23A02AC40041C3F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9948594D23A02AC40041C3F9 /* Main.storyboard */; };
 		9948595123A02AC50041C3F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9948595023A02AC50041C3F9 /* Assets.xcassets */; };
 		9948595423A02AC50041C3F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9948595223A02AC50041C3F9 /* LaunchScreen.storyboard */; };
+		99F1C37023B640E500284F8D /* BloodPressureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */; };
+		99F1C37223B6647600284F8D /* BodyMeasuresDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C37123B6647600284F8D /* BodyMeasuresDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		9948595023A02AC50041C3F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9948595323A02AC50041C3F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9948595523A02AC50041C3F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureDetailViewController.swift; sourceTree = "<group>"; };
+		99F1C37123B6647600284F8D /* BodyMeasuresDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMeasuresDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +72,9 @@
 				9948594523A02AC40041C3F9 /* AppDelegate.swift */,
 				9948594723A02AC40041C3F9 /* SceneDelegate.swift */,
 				9948594923A02AC40041C3F9 /* BloodPressureViewController.swift */,
+				99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */,
 				9948594B23A02AC40041C3F9 /* BodyMeasuresViewController.swift */,
+				99F1C37123B6647600284F8D /* BodyMeasuresDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,9 +179,11 @@
 			files = (
 				9948594C23A02AC40041C3F9 /* BodyMeasuresViewController.swift in Sources */,
 				990CE3F923AFB7D40043B96A /* BodyMeasureReading.swift in Sources */,
+				99F1C37023B640E500284F8D /* BloodPressureDetailViewController.swift in Sources */,
 				9948594A23A02AC40041C3F9 /* BloodPressureViewController.swift in Sources */,
 				9948594623A02AC40041C3F9 /* AppDelegate.swift in Sources */,
 				9948594823A02AC40041C3F9 /* SceneDelegate.swift in Sources */,
+				99F1C37223B6647600284F8D /* BodyMeasuresDetailViewController.swift in Sources */,
 				990CE3F723AFB3EB0043B96A /* BloodPressureReading.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
