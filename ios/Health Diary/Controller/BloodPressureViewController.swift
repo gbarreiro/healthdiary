@@ -108,7 +108,7 @@ class BloodPressureViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showBloodPressureRecords" {
             // Sends the array with the blood pressure records to the detail view controller
-            let destinationVC = segue.destination as! BloodPressureDetailViewController
+            let destinationVC = segue.destination.children.first as! BloodPressureDetailViewController
             destinationVC.records = self.records
         }
     }

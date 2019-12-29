@@ -11,15 +11,30 @@ import UIKit
 class BloodPressureDetailViewController: UITableViewController {
     
     var records: [BloodPressureReading]!
+    let dayFormatter: DateFormatter = DateFormatter()
+    let hourFormatter: DateFormatter = DateFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Configures the date formatter
+        dayFormatter.dateStyle = .medium
+        dayFormatter.timeStyle = .none
+        hourFormatter.dateStyle = .none
+        hourFormatter.timeStyle = .short
+        
+        // Sorts the records by recent first
+        records.reverse()
+        
         // Displays an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem // TODO: show the edit and close buttons
         
     }
 
+    @IBAction func closeViewController(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -36,9 +51,10 @@ class BloodPressureDetailViewController: UITableViewController {
         
         // Fills the cell with the data
         let riskColor = BloodPressureViewController.riskColors[record.riskLevel]
-        cell.systolicValue.text = String(record.systolic)
-        cell.diastolicValue.text = String(record.diastolic)
-        cell.recordDate.text = record.timestamp.description // TODO: use a DateFormatter
+        cell.systolicValue.text = String(record.systolic) + " mmHg"
+        cell.diastolicValue.text = String(record.diastolic) + " mmHg"
+        cell.recordDate.text = dayFormatter.string(from: record.timestamp)
+        cell.recordHour.text = hourFormatter.string(from: record.timestamp)
         cell.systolicValue.textColor = riskColor
         cell.diastolicValue.textColor = riskColor
 
@@ -59,5 +75,6 @@ class BloodPressureRecordCell: UITableViewCell {
     @IBOutlet weak var systolicValue: UILabel!
     @IBOutlet weak var diastolicValue: UILabel!
     @IBOutlet weak var recordDate: UILabel!
+    @IBOutlet weak var recordHour: UILabel!
     
 }

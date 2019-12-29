@@ -160,7 +160,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="8sa-G2-pMx">
                     <connections>
-                        <segue destination="axm-13-dlk" kind="showDetail" identifier="showBloodPressureRecords" id="l4S-pu-0Mh"/>
+                        <segue destination="BIj-We-9Dh" kind="showDetail" identifier="showBloodPressureRecords" id="l4S-pu-0Mh"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -175,7 +175,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="bloodPressureCell" rowHeight="69" id="UTg-qK-3tH" userLabel="Blood Pressure Cell" customClass="BloodPressureRecordCell" customModule="Health_Diary" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="bloodPressureCell" rowHeight="69" id="UTg-qK-3tH" userLabel="Blood Pressure Cell" customClass="BloodPressureRecordCell" customModule="Health_Diary" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UTg-qK-3tH" id="ylU-EB-KZp">
@@ -224,24 +224,33 @@
                                                 <constraint firstItem="Y3f-Xt-hux" firstAttribute="top" secondItem="C8O-F8-Hyx" secondAttribute="top" constant="25.5" id="Fzf-Xd-gXu"/>
                                             </constraints>
                                         </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16th Jan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfl-Ey-mdV" userLabel="Date">
-                                            <rect key="frame" x="324.5" y="24.5" width="62.5" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16th Jan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfl-Ey-mdV" userLabel="Day">
+                                            <rect key="frame" x="324.5" y="12" width="62.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAl-Np-z7g" userLabel="Hour">
+                                            <rect key="frame" x="346" y="37.5" width="41" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Rfl-Ey-mdV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C8O-F8-Hyx" secondAttribute="trailing" constant="40" id="AXK-vh-Obd"/>
+                                        <constraint firstItem="Rfl-Ey-mdV" firstAttribute="firstBaseline" secondItem="6wa-BQ-tUq" secondAttribute="firstBaseline" id="9eo-Tg-MWt"/>
+                                        <constraint firstItem="IAl-Np-z7g" firstAttribute="trailing" secondItem="Rfl-Ey-mdV" secondAttribute="trailing" id="JBb-eh-96g"/>
                                         <constraint firstItem="C8O-F8-Hyx" firstAttribute="top" secondItem="ylU-EB-KZp" secondAttribute="top" constant="12" id="MDN-eN-L0W"/>
+                                        <constraint firstItem="IAl-Np-z7g" firstAttribute="firstBaseline" secondItem="YrI-zZ-kOR" secondAttribute="firstBaseline" id="Qw7-BS-XIZ"/>
                                         <constraint firstAttribute="bottom" secondItem="C8O-F8-Hyx" secondAttribute="bottom" constant="12" id="V2I-K9-8vi"/>
+                                        <constraint firstItem="IAl-Np-z7g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YrI-zZ-kOR" secondAttribute="trailing" priority="998" constant="40" id="eSB-gL-FAt"/>
+                                        <constraint firstItem="Rfl-Ey-mdV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6wa-BQ-tUq" secondAttribute="trailing" constant="40" id="eqe-e4-u2J"/>
                                         <constraint firstItem="C8O-F8-Hyx" firstAttribute="leading" secondItem="ylU-EB-KZp" secondAttribute="leading" constant="14" id="gZG-Xf-lIm"/>
-                                        <constraint firstItem="Rfl-Ey-mdV" firstAttribute="centerY" secondItem="ylU-EB-KZp" secondAttribute="centerY" id="hwY-RD-z5A"/>
                                         <constraint firstAttribute="trailing" secondItem="Rfl-Ey-mdV" secondAttribute="trailing" constant="27" id="zgT-tV-Zdy"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="diastolicValue" destination="YrI-zZ-kOR" id="ff0-gW-R98"/>
                                     <outlet property="recordDate" destination="Rfl-Ey-mdV" id="OPz-w6-hLq"/>
+                                    <outlet property="recordHour" destination="IAl-Np-z7g" id="1VH-Kq-nus"/>
                                     <outlet property="systolicValue" destination="6wa-BQ-tUq" id="hbb-xm-9GL"/>
                                 </connections>
                             </tableViewCell>
@@ -251,10 +260,17 @@
                             <outlet property="delegate" destination="axm-13-dlk" id="pdS-ip-S7e"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="4fy-Zr-RrP">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="kWi-a6-eNh">
+                            <connections>
+                                <action selector="closeViewController:" destination="axm-13-dlk" id="a58-jw-FDE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvN-LT-1cY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2341" y="-320"/>
+            <point key="canvasLocation" x="3250.7246376811595" y="-320.08928571428572"/>
         </scene>
         <!--Body Measures Detail View Controller-->
         <scene sceneID="fKA-uq-8gT">
@@ -349,10 +365,13 @@
                             <outlet property="delegate" destination="eR9-rd-L06" id="2Wy-Xf-bxs"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="bB6-Ho-K5o">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="gx2-kp-fpo"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUj-on-0Xa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2341" y="360"/>
+            <point key="canvasLocation" x="3250.7246376811595" y="359.59821428571428"/>
         </scene>
         <!--Body Measures-->
         <scene sceneID="wg7-f3-ORb">
@@ -524,7 +543,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="9bd-ox-ADq">
                     <connections>
-                        <segue destination="eR9-rd-L06" kind="showDetail" identifier="showBodyMeasureRecords" id="B3v-4d-GB4"/>
+                        <segue destination="l7G-13-RYm" kind="showDetail" identifier="showBodyMeasureRecords" id="B3v-4d-GB4"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -549,6 +568,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Blood pressure readings-->
+        <scene sceneID="X9w-MP-5mR">
+            <objects>
+                <navigationController title="Blood pressure readings" automaticallyAdjustsScrollViewInsets="NO" id="BIj-We-9Dh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oyQ-E4-ezx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="axm-13-dlk" kind="relationship" relationship="rootViewController" id="gfI-L5-2bl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nX4-kt-KI3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2340.5797101449275" y="-320.08928571428572"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oQk-0L-JSr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l7G-13-RYm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JqU-Aw-Snt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eR9-rd-L06" kind="relationship" relationship="rootViewController" id="obw-DO-7aL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0WK-e9-iMT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2340.5797101449275" y="359.59821428571428"/>
         </scene>
     </scenes>
     <resources>
