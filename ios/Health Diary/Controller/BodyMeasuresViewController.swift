@@ -114,5 +114,13 @@ class BodyMeasuresViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showBodyMeasureRecords" {
+            // Sends the array with the body measure records to the detail view controller
+            let destinationVC = segue.destination.children.first as! BodyMeasuresDetailViewController
+            destinationVC.records = self.records
+        }
+    }
         
 }

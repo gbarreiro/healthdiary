@@ -9,82 +9,74 @@
 import UIKit
 
 class BodyMeasuresDetailViewController: UITableViewController {
+    
+    var records: [BodyMeasureReading] = []
+    let dayFormatter: DateFormatter = DateFormatter()
+    let hourFormatter: DateFormatter = DateFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Configures the date formatter
+        dayFormatter.dateStyle = .medium
+        dayFormatter.timeStyle = .none
+        hourFormatter.dateStyle = .none
+        hourFormatter.timeStyle = .short
+        
+        // Sorts the records by recent first
+        records.reverse()
+        
+        // Displays an Edit button in the navigation bar for this view controller.
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @IBAction func closeViewController(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1 // only 1 section in the table
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return records.count // returns the number of rows the table will have
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bodyMeasureCell", for: indexPath) as! BodyMeasureRecordCell
+        let record = records[indexPath.row]
+        
+        // Fills the cell with the data
+        let riskColor = BodyMeasuresViewController.riskColors[record.bmiLevel]
+        cell.weight.text = String(format: "%.1f", record.weight) + " kg"
+        cell.height.text = String(record.height) + " cm"
+        cell.bmi.text = String(format: "%.1f", record.bmi)
+        cell.recordDate.text = dayFormatter.string(from: record.timestamp)
+        cell.recordHour.text = hourFormatter.string(from: record.timestamp)
+        cell.weight.textColor = riskColor
+        cell.height.textColor = riskColor
+        cell.bmi.textColor = riskColor
 
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            self.records.remove(at: indexPath.row) // TODO: remove from the actual datasource
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+}
 
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+class BodyMeasureRecordCell: UITableViewCell {
+    @IBOutlet weak var weight: UILabel!
+    @IBOutlet weak var height: UILabel!
+    @IBOutlet weak var bmi: UILabel!
+    @IBOutlet weak var recordDate: UILabel!
+    @IBOutlet weak var recordHour: UILabel!
+    
 }

@@ -224,27 +224,31 @@
                                                 <constraint firstItem="Y3f-Xt-hux" firstAttribute="top" secondItem="C8O-F8-Hyx" secondAttribute="top" constant="25.5" id="Fzf-Xd-gXu"/>
                                             </constraints>
                                         </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16th Jan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfl-Ey-mdV" userLabel="Day">
-                                            <rect key="frame" x="324.5" y="12" width="62.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAl-Np-z7g" userLabel="Hour">
-                                            <rect key="frame" x="346" y="37.5" width="41" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="En5-60-S5f" userLabel="Date">
+                                            <rect key="frame" x="331" y="11.5" width="62.5" height="46"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16th Jan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfl-Ey-mdV" userLabel="Day">
+                                                    <rect key="frame" x="0.0" y="0.0" width="62.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAl-Np-z7g" userLabel="Hour">
+                                                    <rect key="frame" x="21.5" y="25.5" width="41" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Rfl-Ey-mdV" firstAttribute="firstBaseline" secondItem="6wa-BQ-tUq" secondAttribute="firstBaseline" id="9eo-Tg-MWt"/>
-                                        <constraint firstItem="IAl-Np-z7g" firstAttribute="trailing" secondItem="Rfl-Ey-mdV" secondAttribute="trailing" id="JBb-eh-96g"/>
+                                        <constraint firstAttribute="bottom" secondItem="En5-60-S5f" secondAttribute="bottom" constant="11.5" id="66y-ch-BNL"/>
+                                        <constraint firstAttribute="trailing" secondItem="En5-60-S5f" secondAttribute="trailing" constant="20.5" id="HDW-Sv-6WC"/>
                                         <constraint firstItem="C8O-F8-Hyx" firstAttribute="top" secondItem="ylU-EB-KZp" secondAttribute="top" constant="12" id="MDN-eN-L0W"/>
-                                        <constraint firstItem="IAl-Np-z7g" firstAttribute="firstBaseline" secondItem="YrI-zZ-kOR" secondAttribute="firstBaseline" id="Qw7-BS-XIZ"/>
                                         <constraint firstAttribute="bottom" secondItem="C8O-F8-Hyx" secondAttribute="bottom" constant="12" id="V2I-K9-8vi"/>
-                                        <constraint firstItem="IAl-Np-z7g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YrI-zZ-kOR" secondAttribute="trailing" priority="998" constant="40" id="eSB-gL-FAt"/>
-                                        <constraint firstItem="Rfl-Ey-mdV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6wa-BQ-tUq" secondAttribute="trailing" constant="40" id="eqe-e4-u2J"/>
+                                        <constraint firstItem="En5-60-S5f" firstAttribute="centerY" secondItem="ylU-EB-KZp" secondAttribute="centerY" id="VRZ-cq-iJH"/>
+                                        <constraint firstItem="En5-60-S5f" firstAttribute="top" secondItem="ylU-EB-KZp" secondAttribute="top" constant="11.5" id="diz-bs-sIR"/>
+                                        <constraint firstItem="En5-60-S5f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C8O-F8-Hyx" secondAttribute="trailing" constant="40" id="g5g-xH-yer"/>
                                         <constraint firstItem="C8O-F8-Hyx" firstAttribute="leading" secondItem="ylU-EB-KZp" secondAttribute="leading" constant="14" id="gZG-Xf-lIm"/>
-                                        <constraint firstAttribute="trailing" secondItem="Rfl-Ey-mdV" secondAttribute="trailing" constant="27" id="zgT-tV-Zdy"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -281,7 +285,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="bodyMeasureCell" rowHeight="93" id="SmZ-9M-pKg" userLabel="Body Measure Cell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="bodyMeasureCell" rowHeight="93" id="SmZ-9M-pKg" userLabel="Body Measure Cell" customClass="BodyMeasureRecordCell" customModule="Health_Diary" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="93"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SmZ-9M-pKg" id="kzo-kd-G53">
@@ -344,20 +348,40 @@
                                                 </stackView>
                                             </subviews>
                                         </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16th Jan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzg-B6-MGL" userLabel="Date">
-                                            <rect key="frame" x="324.5" y="36.5" width="62.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="kDs-lh-tzM" userLabel="Date">
+                                            <rect key="frame" x="331" y="22.5" width="62.5" height="48"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16th Jan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzg-B6-MGL" userLabel="Date">
+                                                    <rect key="frame" x="0.0" y="0.0" width="62.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zF5-2o-PrE" userLabel="Hour">
+                                                    <rect key="frame" x="21.5" y="27.5" width="41" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="iDJ-pc-MjB" firstAttribute="leading" secondItem="kzo-kd-G53" secondAttribute="leading" constant="14" id="0qL-Nd-WW0"/>
-                                        <constraint firstItem="uzg-B6-MGL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iDJ-pc-MjB" secondAttribute="trailing" constant="40" id="U0f-Ty-tT0"/>
-                                        <constraint firstAttribute="trailing" secondItem="uzg-B6-MGL" secondAttribute="trailing" constant="27" id="Ykh-V7-kyz"/>
+                                        <constraint firstItem="kDs-lh-tzM" firstAttribute="centerY" secondItem="kzo-kd-G53" secondAttribute="centerY" id="BkY-Mw-hrc"/>
+                                        <constraint firstAttribute="bottom" secondItem="iDJ-pc-MjB" secondAttribute="bottom" constant="10.5" id="JDF-3g-m8h"/>
+                                        <constraint firstAttribute="trailing" secondItem="kDs-lh-tzM" secondAttribute="trailing" constant="20.5" id="KAD-bV-oCU"/>
+                                        <constraint firstItem="kDs-lh-tzM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iDJ-pc-MjB" secondAttribute="trailing" constant="40" id="UrX-ja-JOV"/>
+                                        <constraint firstItem="kDs-lh-tzM" firstAttribute="top" secondItem="kzo-kd-G53" secondAttribute="top" constant="22.5" id="Xnc-4v-PnK"/>
                                         <constraint firstItem="iDJ-pc-MjB" firstAttribute="top" secondItem="kzo-kd-G53" secondAttribute="top" constant="11" id="enc-ft-pcB"/>
-                                        <constraint firstItem="uzg-B6-MGL" firstAttribute="centerY" secondItem="kzo-kd-G53" secondAttribute="centerY" id="sv2-6A-kQf"/>
+                                        <constraint firstAttribute="bottom" secondItem="kDs-lh-tzM" secondAttribute="bottom" constant="22.5" id="pSA-L7-Arc"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bmi" destination="Bpp-ga-bIa" id="IJm-ja-D9S"/>
+                                    <outlet property="height" destination="vhW-bp-crV" id="m4Z-Wa-kHG"/>
+                                    <outlet property="recordDate" destination="uzg-B6-MGL" id="vGp-ec-8tc"/>
+                                    <outlet property="recordHour" destination="zF5-2o-PrE" id="T30-ul-bOp"/>
+                                    <outlet property="weight" destination="xUi-PT-rgj" id="epq-fH-Fuj"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -366,7 +390,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="bB6-Ho-K5o">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="gx2-kp-fpo"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="gx2-kp-fpo">
+                            <connections>
+                                <action selector="closeViewController:" destination="eR9-rd-L06" id="9gs-lp-bLH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUj-on-0Xa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

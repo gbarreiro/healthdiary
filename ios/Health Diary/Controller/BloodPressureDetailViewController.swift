@@ -10,7 +10,7 @@ import UIKit
 
 class BloodPressureDetailViewController: UITableViewController {
     
-    var records: [BloodPressureReading]!
+    var records: [BloodPressureReading] = []
     let dayFormatter: DateFormatter = DateFormatter()
     let hourFormatter: DateFormatter = DateFormatter()
 
@@ -27,7 +27,7 @@ class BloodPressureDetailViewController: UITableViewController {
         records.reverse()
         
         // Displays an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem // TODO: show the edit and close buttons
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
         
     }
 
