@@ -64,6 +64,6 @@ class BloodPressureReadingsAdapter(private val context: Context, private val dat
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = database.getBloodPressureRecords().size
+    override fun getItemCount() = bloodPressureRecords.size
 
 }

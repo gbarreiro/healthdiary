@@ -1,5 +1,6 @@
 package com.guillermobarreiro.healthdiary.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.guillermobarreiro.healthdiary.R
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
@@ -21,6 +23,7 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
     private lateinit var insertedWeight: EditText
     private lateinit var insertedHeight: EditText
     private lateinit var registerButton: Button
+    private lateinit var averageCard: CardView
     private lateinit var averageWeight: TextView
     private lateinit var averageHeight: TextView
     private lateinit var averageBmi: TextView
@@ -51,6 +54,7 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
         insertedWeight = view.findViewById(R.id.inserted_weight)
         insertedHeight = view.findViewById(R.id.inserted_height)
         registerButton = view.findViewById(R.id.register_body_measure)
+        averageCard = view.findViewById(R.id.average_body_measures_card)
         averageWeight = view.findViewById(R.id.avg_weight)
         averageHeight = view.findViewById(R.id.avg_height)
         averageBmi = view.findViewById(R.id.avg_bmi)
@@ -64,6 +68,7 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
         // Sets the onClick listeners
         registerButton.setOnClickListener { this.registerWeight() }
         randomSwitch.setOnClickListener { this.switchChanged() }
+        averageCard.setOnClickListener { this.showRecords() }
 
         // Sets up a text changed listener to the weight input text field (for enabling/disabling the insert button)
         insertedWeight.addTextChangedListener(this)
@@ -124,6 +129,11 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
             averageBmi.setTextColor(bmiColor)
         }
 
+    }
+
+    private fun showRecords(){
+        val intent = Intent(context, BodyMeasuresDetailActivity::class.java)
+        startActivity(intent)
     }
 
     // Launched when the "random values" switch is toggled
