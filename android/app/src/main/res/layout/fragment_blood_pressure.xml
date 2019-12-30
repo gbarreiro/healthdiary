@@ -76,6 +76,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/average_blood_pressure_card"
         android:layout_width="393dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -1,5 +1,6 @@
 package com.guillermobarreiro.healthdiary.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.guillermobarreiro.healthdiary.R
 import com.guillermobarreiro.healthdiary.database.BloodPressureReading
@@ -22,6 +24,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
     private lateinit var insertedSystolic: EditText
     private lateinit var insertedDiastolic: EditText
     private lateinit var registerButton: Button
+    private lateinit var averageCard: CardView
     private lateinit var averageDiastolic: TextView
     private lateinit var averageSystolic: TextView
     //endregion
@@ -50,6 +53,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         insertedSystolic = view.findViewById(R.id.inserted_systolic)
         insertedDiastolic = view.findViewById(R.id.inserted_diastolic)
         registerButton = view.findViewById(R.id.register_blood_pressure)
+        averageCard = view.findViewById(R.id.average_blood_pressure_card)
         averageDiastolic = view.findViewById(R.id.avg_diastolic)
         averageSystolic = view.findViewById(R.id.avg_systolic)
 
@@ -62,6 +66,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         // Sets up the onClick listeners
         randomSwitch.setOnClickListener { this.switchChanged() }
         registerButton.setOnClickListener { this.registerPressure() }
+        averageCard.setOnClickListener { this.showRecords() }
 
         // Sets up a text changed listener to the blood pressure input text fields (for enabling/disabling the insert button)
         insertedDiastolic.addTextChangedListener(this)
@@ -116,6 +121,11 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         }
 
 
+    }
+
+    private fun showRecords(){
+        val intent = Intent(context, BloodPressureDetailActivity::class.java)
+        startActivity(intent)
     }
 
     // Launched when the "random values" switch is toggled

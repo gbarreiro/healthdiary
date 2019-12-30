@@ -26,5 +26,12 @@
     <string name="average_systolic">Avg systolic:</string>
     <string name="average_height">Avg height (cm):</string>
     <string name="average_bmi">Avg BMI:</string>
+    <string name="systolic_label">Systolic:</string>
+    <string name="diastolic_label">Diastolic:</string>
+    <string name="weight_label">Weight:</string>
+    <string name="height_label">Height:</string>
+    <string name="bmi_label">BMI:</string>
+    <string name="blood_pressure_detail">Blood pressure records</string>
+    <string name="body_measures_detail">Body measures records</string>
 
 </resources>

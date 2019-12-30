@@ -50,7 +50,7 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
      */
     fun getBloodPressureRecords(): Array<BloodPressureReading> {
         val db = this.readableDatabase
-        val cursor = db.query(DatabaseTables.BLOOD_PRESSURE.table, null, null, null, null, null, null)
+        val cursor = db.query(DatabaseTables.BLOOD_PRESSURE.table, null, null, null, null, null, "${BloodPressureReading.DatabaseEntry.COLUMN_TIMESTAMP} DESC")
 
         // Iterates through the cursor, for converting each entry into an object and store it into the array
         val records = mutableListOf<BloodPressureReading>()
@@ -126,7 +126,7 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
      */
     fun getBodyMeasureRecords(): Array<BodyMeasureReading>{
         val db = this.readableDatabase
-        val cursor = db.query(DatabaseTables.WEIGHT.table, null, null, null, null, null, null)
+        val cursor = db.query(DatabaseTables.WEIGHT.table, null, null, null, null, null, "${BodyMeasureReading.DatabaseEntry.COLUMN_TIMESTAMP} DESC")
 
         // Iterates through the cursor, for converting each entry into an object and store it into the array
         val records = mutableListOf<BodyMeasureReading>()
