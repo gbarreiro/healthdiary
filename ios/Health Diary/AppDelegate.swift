@@ -12,9 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Initialize singleton Data Controller
+        let dataController = DataController(modelName: "HealthModel")
+        DataController.shared = dataController
+        DataController.shared.load()
+        
         return true
     }
 

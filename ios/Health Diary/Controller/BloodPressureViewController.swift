@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class BloodPressureViewController: UIViewController, UITextFieldDelegate {
+class BloodPressureViewController: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
     
     // Colors for the average values, depending on the risk level
     public static let riskColors: [BloodPressureReading.RiskLevel: UIColor] = [
@@ -27,7 +28,26 @@ class BloodPressureViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var randomSwitch: UISwitch!
     
     // MARK: Data sources
-    private var records: [BloodPressureReading] = []
+    private var fetchedResultsController: NSFetchedResultsController<BloodPressureReading>!
+    
+    private func setupFetchedResultsController() {
+        if fetchedResultsController == nil {
+            let fetchRequest:NSFetchRequest<BloodPressureReading> = BloodPressureReading.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false) // shows the readings from newest to oldest
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataController.shared.viewContext, sectionNameKeyPath: nil, cacheName: "bloodpressure")
+            
+            fetchedResultsController.delegate = self
+            
+            do {
+                try fetchedResultsController.performFetch()
+            } catch {
+                fatalError("The fetch could not be performed: \(error.localizedDescription)")
+            }
+        }
+
+    }
     
     // MARK: UIActions
     @IBAction func updateUIStatus() {
@@ -54,14 +74,14 @@ class BloodPressureViewController: UIViewController, UITextFieldDelegate {
         
         if(randomSwitch.isOn){
             // Random values for the blood pressure reading
-            reading = BloodPressureReading(timestamp: Date())
+            reading = BloodPressureReading(context: DataController.shared.viewContext, timestamp: Date())
             print("Random value\nSystolic: \(String(describing: reading!.systolic)). Diastolic: \(String(describing: reading!.diastolic))")
         } else{
             // User introduced values for the blood pressure reading
             if let systolic = Int(systolicInput.text!), let diastolic = Int(diastolicInput.text!){
                 if systolic > 0 && diastolic > 0 {
                     // Introduced systolic and diastolic values are positive integers
-                    reading = BloodPressureReading(systolic: systolic, diastolic: diastolic, timestamp: Date())
+                    reading = BloodPressureReading(context: DataController.shared.viewContext, systolic: systolic, diastolic: diastolic, timestamp: Date())
                     print("Inserted value\nSystolic: \(String(describing: reading!.systolic)). Diastolic: \(String(describing: reading!.diastolic))")
                 }
             }
@@ -72,16 +92,8 @@ class BloodPressureViewController: UIViewController, UITextFieldDelegate {
         }
 
         // Registers the reading in the array
-        if let reading = reading{
-            records.append(reading)
-            
-            // Update the average values
-            let averageValues = BloodPressureReading(records: records)
-            let riskColor = BloodPressureViewController.riskColors[averageValues.riskLevel]
-            systolicAverage.text = String(averageValues.systolic)
-            diastolicAverage.text = String(averageValues.diastolic)
-            systolicAverage.textColor = riskColor
-            diastolicAverage.textColor = riskColor
+        if reading != nil{
+            try? DataController.shared.viewContext.save()
         }
 
     }
@@ -102,16 +114,50 @@ class BloodPressureViewController: UIViewController, UITextFieldDelegate {
     // MARK: ViewController lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupFetchedResultsController()
+        updateAverageValues()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showBloodPressureRecords" {
-            // Sends the array with the blood pressure records to the detail view controller
-            let destinationVC = segue.destination.children.first as! BloodPressureDetailViewController
-            destinationVC.records = self.records
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set up FetchedResultsController
+        setupFetchedResultsController()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Release FetchedResultsViewController
+        self.fetchedResultsController = nil
+    }
+    
+    private func updateAverageValues() {
+        // Updates the average values
+        let average = BloodPressureReading.calculateAverage(records: fetchedResultsController.fetchedObjects ?? [])
+        if let average = average {
+            let riskColor = BloodPressureViewController.riskColors[average.riskLevel]
+            systolicAverage.text = String(average.systolic)
+            diastolicAverage.text = String(average.diastolic)
+            systolicAverage.textColor = riskColor
+            diastolicAverage.textColor = riskColor
+        } else {
+            // No readings registered
+            systolicAverage.text = "–"
+            diastolicAverage.text = "–"
+            systolicAverage.textColor = UIColor.purple
+            diastolicAverage.textColor = UIColor.purple
+        }
+
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        // Reading added or deleted
+        updateAverageValues()
+
+    }
+    
+    
     
 }
 

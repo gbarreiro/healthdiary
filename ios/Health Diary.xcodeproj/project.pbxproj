@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		990CE3F723AFB3EB0043B96A /* BloodPressureReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CE3F623AFB3EB0043B96A /* BloodPressureReading.swift */; };
-		990CE3F923AFB7D40043B96A /* BodyMeasureReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CE3F823AFB7D40043B96A /* BodyMeasureReading.swift */; };
+		99366A0323BE774200128FD3 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99366A0223BE774200128FD3 /* DataController.swift */; };
 		9948594623A02AC40041C3F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9948594523A02AC40041C3F9 /* AppDelegate.swift */; };
 		9948594823A02AC40041C3F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9948594723A02AC40041C3F9 /* SceneDelegate.swift */; };
 		9948594A23A02AC40041C3F9 /* BloodPressureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9948594923A02AC40041C3F9 /* BloodPressureViewController.swift */; };
@@ -16,13 +15,15 @@
 		9948594F23A02AC40041C3F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9948594D23A02AC40041C3F9 /* Main.storyboard */; };
 		9948595123A02AC50041C3F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9948595023A02AC50041C3F9 /* Assets.xcassets */; };
 		9948595423A02AC50041C3F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9948595223A02AC50041C3F9 /* LaunchScreen.storyboard */; };
+		9985883A23BF598100AE7333 /* BloodPressureReading+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985883923BF598100AE7333 /* BloodPressureReading+Extension.swift */; };
+		9985883C23BF5B3000AE7333 /* BodyMeasureReading+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985883B23BF5B3000AE7333 /* BodyMeasureReading+Extension.swift */; };
+		998D41B623BD2CF8007860A7 /* HealthModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 998D41B423BD2CF8007860A7 /* HealthModel.xcdatamodeld */; };
 		99F1C37023B640E500284F8D /* BloodPressureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */; };
 		99F1C37223B6647600284F8D /* BodyMeasuresDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C37123B6647600284F8D /* BodyMeasuresDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		990CE3F623AFB3EB0043B96A /* BloodPressureReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureReading.swift; sourceTree = "<group>"; };
-		990CE3F823AFB7D40043B96A /* BodyMeasureReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMeasureReading.swift; sourceTree = "<group>"; };
+		99366A0223BE774200128FD3 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		9948594223A02AC40041C3F9 /* Health Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Health Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9948594523A02AC40041C3F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9948594723A02AC40041C3F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +33,9 @@
 		9948595023A02AC50041C3F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9948595323A02AC50041C3F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9948595523A02AC50041C3F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9985883923BF598100AE7333 /* BloodPressureReading+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BloodPressureReading+Extension.swift"; sourceTree = "<group>"; };
+		9985883B23BF5B3000AE7333 /* BodyMeasureReading+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BodyMeasureReading+Extension.swift"; sourceTree = "<group>"; };
+		998D41B523BD2CF8007860A7 /* HealthModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthModel.xcdatamodel; sourceTree = "<group>"; };
 		99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureDetailViewController.swift; sourceTree = "<group>"; };
 		99F1C37123B6647600284F8D /* BodyMeasuresDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMeasuresDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,8 +54,10 @@
 		990CE3F523AFB3D30043B96A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				990CE3F623AFB3EB0043B96A /* BloodPressureReading.swift */,
-				990CE3F823AFB7D40043B96A /* BodyMeasureReading.swift */,
+				998D41B423BD2CF8007860A7 /* HealthModel.xcdatamodeld */,
+				99366A0223BE774200128FD3 /* DataController.swift */,
+				9985883923BF598100AE7333 /* BloodPressureReading+Extension.swift */,
+				9985883B23BF5B3000AE7333 /* BodyMeasureReading+Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -69,8 +75,6 @@
 		990CE3FB23AFBA680043B96A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9948594523A02AC40041C3F9 /* AppDelegate.swift */,
-				9948594723A02AC40041C3F9 /* SceneDelegate.swift */,
 				9948594923A02AC40041C3F9 /* BloodPressureViewController.swift */,
 				99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */,
 				9948594B23A02AC40041C3F9 /* BodyMeasuresViewController.swift */,
@@ -99,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				9948595523A02AC50041C3F9 /* Info.plist */,
+				9948594523A02AC40041C3F9 /* AppDelegate.swift */,
+				9948594723A02AC40041C3F9 /* SceneDelegate.swift */,
 				990CE3F523AFB3D30043B96A /* Model */,
 				990CE3FA23AFBA570043B96A /* View */,
 				990CE3FB23AFBA680043B96A /* Controller */,
@@ -178,13 +184,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9948594C23A02AC40041C3F9 /* BodyMeasuresViewController.swift in Sources */,
-				990CE3F923AFB7D40043B96A /* BodyMeasureReading.swift in Sources */,
+				9985883A23BF598100AE7333 /* BloodPressureReading+Extension.swift in Sources */,
 				99F1C37023B640E500284F8D /* BloodPressureDetailViewController.swift in Sources */,
 				9948594A23A02AC40041C3F9 /* BloodPressureViewController.swift in Sources */,
 				9948594623A02AC40041C3F9 /* AppDelegate.swift in Sources */,
 				9948594823A02AC40041C3F9 /* SceneDelegate.swift in Sources */,
+				998D41B623BD2CF8007860A7 /* HealthModel.xcdatamodeld in Sources */,
+				99366A0323BE774200128FD3 /* DataController.swift in Sources */,
 				99F1C37223B6647600284F8D /* BodyMeasuresDetailViewController.swift in Sources */,
-				990CE3F723AFB3EB0043B96A /* BloodPressureReading.swift in Sources */,
+				9985883C23BF5B3000AE7333 /* BodyMeasureReading+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +388,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		998D41B423BD2CF8007860A7 /* HealthModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				998D41B523BD2CF8007860A7 /* HealthModel.xcdatamodel */,
+			);
+			currentVersion = 998D41B523BD2CF8007860A7 /* HealthModel.xcdatamodel */;
+			path = HealthModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9948593A23A02AC40041C3F9 /* Project object */;
 }

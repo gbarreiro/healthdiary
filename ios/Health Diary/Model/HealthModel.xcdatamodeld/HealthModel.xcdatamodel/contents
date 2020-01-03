@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BloodPressureReading" representedClassName=".BloodPressureReading" syncable="YES" codeGenerationType="class">
+        <attribute name="diastolic" attributeType="Integer 16" minValueString="0" usesScalarValueType="YES"/>
+        <attribute name="systolic" attributeType="Integer 16" minValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="BodyMeasureReading" representedClassName=".BodyMeasureReading" syncable="YES" codeGenerationType="class">
+        <attribute name="height" attributeType="Integer 16" minValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="weight" attributeType="Float" minValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="BloodPressureReading" positionX="-118.3828125" positionY="25.30078125" width="128" height="88"/>
+        <element name="BodyMeasureReading" positionX="127.91796875" positionY="23.91796875" width="128" height="88"/>
+    </elements>
+</model>

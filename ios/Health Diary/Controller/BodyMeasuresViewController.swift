@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class BodyMeasuresViewController: UIViewController, UITextFieldDelegate {
+class BodyMeasuresViewController: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
     
     // Colors for the BMI values, depending on the risk level
     public static let riskColors: [BodyMeasureReading.BMILevel: UIColor] = [
@@ -28,7 +29,25 @@ class BodyMeasuresViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var randomSwitch: UISwitch!
     
     // MARK: Data sources
-    private var records: [BodyMeasureReading] = []
+    private var fetchedResultsController: NSFetchedResultsController<BodyMeasureReading>!
+    
+    private func setupFetchedResultsController() {
+        if fetchedResultsController == nil {
+            let fetchRequest:NSFetchRequest<BodyMeasureReading> = BodyMeasureReading.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false) // shows the readings from newest to oldest
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataController.shared.viewContext, sectionNameKeyPath: nil, cacheName: "bodymeasure")
+            fetchedResultsController.delegate = self
+            
+            do {
+                try fetchedResultsController.performFetch()
+            } catch {
+                fatalError("The fetch could not be performed: \(error.localizedDescription)")
+            }
+        }
+
+    }
     
     // MARK: UIActions
     @IBAction func updateUIStatus() {
@@ -55,14 +74,14 @@ class BodyMeasuresViewController: UIViewController, UITextFieldDelegate {
         
         if(randomSwitch.isOn){
             // Random values for the body measure reading
-            reading = BodyMeasureReading(timestamp: Date())
+            reading = BodyMeasureReading(context: DataController.shared.viewContext, timestamp: Date())
             print("Random value\nWeight: \(String(describing: reading!.weight)). Height: \(String(describing: reading!.height))")
         } else{
             // User introduced values for the body measure reading
             if let weight = Float(weightInput.text!), let height = Int(heightInput.text!){
                 if weight > 0 && height > 0 {
                     // Introduced weight and height values are positive integers
-                    reading = BodyMeasureReading(weight: weight, height: height, timestamp: Date())
+                    reading = BodyMeasureReading(context: DataController.shared.viewContext, weight: weight, height: height, timestamp: Date())
                     print("Inserted value\nWeight: \(String(describing: reading!.weight)). Height: \(String(describing: reading!.height))")
                 }
             }
@@ -71,20 +90,10 @@ class BodyMeasuresViewController: UIViewController, UITextFieldDelegate {
             weightInput.text = ""
             heightInput.text = ""
         }
-
+        
         // Registers the reading in the array
-        if let reading = reading{
-            records.append(reading)
-            
-            // Update the average values
-            let averageValues = BodyMeasureReading(records: records)
-            let riskColor = BodyMeasuresViewController.riskColors[averageValues.bmiLevel]
-            weightAverage.text = String(format: "%.1f", averageValues.weight)
-            heightAverage.text = String(averageValues.height)
-            bmiAverage.text = String(format: "%.1f", averageValues.bmi)
-            weightAverage.textColor = riskColor
-            heightAverage.textColor = riskColor
-            bmiAverage.textColor = riskColor
+        if reading != nil{
+            try? DataController.shared.viewContext.save()
         }
 
     }
@@ -112,15 +121,51 @@ class BodyMeasuresViewController: UIViewController, UITextFieldDelegate {
     // MARK: ViewController lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupFetchedResultsController()
+        updateAverageValues()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showBodyMeasureRecords" {
-            // Sends the array with the body measure records to the detail view controller
-            let destinationVC = segue.destination.children.first as! BodyMeasuresDetailViewController
-            destinationVC.records = self.records
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Set up FetchedResultsController
+        setupFetchedResultsController()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Release FetchedResultsViewController
+        self.fetchedResultsController = nil
+    }
+    
+    private func updateAverageValues() {
+        // Updates the average values
+        let average = BodyMeasureReading.calculateAverage(records: fetchedResultsController.fetchedObjects ?? [])
+        if let average = average {
+            let riskColor = BodyMeasuresViewController.riskColors[average.riskLevel]
+            weightAverage.text = String(format: "%.1f", average.weight)
+            heightAverage.text = String(average.height)
+            bmiAverage.text = String(format: "%.1f", average.bmi)
+            weightAverage.textColor = riskColor
+            heightAverage.textColor = riskColor
+            bmiAverage.textColor = riskColor
+        } else {
+            // No readings registered
+            weightAverage.text = "–"
+            heightAverage.text = "–"
+            bmiAverage.text = "–"
+            weightAverage.textColor = UIColor.purple
+            heightAverage.textColor = UIColor.purple
+            bmiAverage.textColor = UIColor.purple
+            
         }
+
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        // Reading added or deleted
+        updateAverageValues()
     }
         
 }

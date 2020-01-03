@@ -7,12 +7,33 @@
 //
 
 import UIKit
+import CoreData
 
-class BloodPressureDetailViewController: UITableViewController {
+class BloodPressureDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var records: [BloodPressureReading] = []
     let dayFormatter: DateFormatter = DateFormatter()
     let hourFormatter: DateFormatter = DateFormatter()
+    
+    // MARK: Data sources
+    private var fetchedResultsController: NSFetchedResultsController<BloodPressureReading>!
+    
+    private func setupFetchedResultsController() {
+        if fetchedResultsController == nil {
+            let fetchRequest:NSFetchRequest<BloodPressureReading> = BloodPressureReading.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false) // shows the readings from newest to oldest
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataController.shared.viewContext, sectionNameKeyPath: nil, cacheName: "bloodpressure")
+            fetchedResultsController.delegate = self
+            
+            do {
+                try fetchedResultsController.performFetch()
+            } catch {
+                fatalError("The fetch could not be performed: \(error.localizedDescription)")
+            }
+        }
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +44,25 @@ class BloodPressureDetailViewController: UITableViewController {
         hourFormatter.dateStyle = .none
         hourFormatter.timeStyle = .short
         
-        // Sorts the records by recent first
-        records.reverse()
-        
         // Displays an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        setupFetchedResultsController()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFetchedResultsController()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: false)
+            tableView.reloadRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        fetchedResultsController = nil
     }
 
     @IBAction func closeViewController(_ sender: Any) {
@@ -38,23 +72,23 @@ class BloodPressureDetailViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 // only 1 section in the table
+        return fetchedResultsController.sections?.count ?? 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return records.count // returns the number of rows the table will have
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bloodPressureCell", for: indexPath) as! BloodPressureRecordCell
-        let record = records[indexPath.row]
+        let record = fetchedResultsController.object(at: indexPath)
         
         // Fills the cell with the data
         let riskColor = BloodPressureViewController.riskColors[record.riskLevel]
         cell.systolicValue.text = String(record.systolic) + " mmHg"
         cell.diastolicValue.text = String(record.diastolic) + " mmHg"
-        cell.recordDate.text = dayFormatter.string(from: record.timestamp)
-        cell.recordHour.text = hourFormatter.string(from: record.timestamp)
+        cell.recordDate.text = dayFormatter.string(from: record.timestamp!)
+        cell.recordHour.text = hourFormatter.string(from: record.timestamp!)
         cell.systolicValue.textColor = riskColor
         cell.diastolicValue.textColor = riskColor
 
@@ -63,10 +97,37 @@ class BloodPressureDetailViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            self.records.remove(at: indexPath.row) // TODO: remove from the actual datasource
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            // Delete the item from the data source
+            let deletedReading = fetchedResultsController.object(at: indexPath)
+            DataController.shared.viewContext.delete(deletedReading)
+            try? DataController.shared.viewContext.save()
         }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        // A reading has been added or removed
+        switch type {
+        case .insert:
+            // Updates table
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+            break
+        case .delete:
+            // Updates table
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            break
+        default:
+            // Do nothing, not allowed ops
+            break
+        }
+    }
+    
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 
 }
