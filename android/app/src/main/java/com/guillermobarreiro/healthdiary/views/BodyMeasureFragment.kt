@@ -126,6 +126,8 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
             averageWeight.text = avgWeight
             averageHeight.text = avgHeight
             averageBmi.text = avgBmi
+            averageWeight.setTextColor(bmiColor)
+            averageHeight.setTextColor(bmiColor)
             averageBmi.setTextColor(bmiColor)
         }
 
