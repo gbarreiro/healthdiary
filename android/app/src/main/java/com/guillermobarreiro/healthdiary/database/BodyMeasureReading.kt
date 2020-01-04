@@ -3,15 +3,19 @@ package com.guillermobarreiro.healthdiary.database
 import android.content.ContentValues
 import android.os.Bundle
 import android.provider.BaseColumns
-import java.util.*
+import java.util.Date
+import java.util.Random
 import kotlin.math.pow
-import kotlin.random.Random
 
 /**
  * Represents a body measure reading, this means, the sampling of the user's weight and height in a specific moment.
  * The weight is stored as a decimal number in kg, and the height as an integer in cm.
  */
 class BodyMeasureReading(val weight: Float, val height: Int, val timestamp: Date) : DatabaseEntity {
+
+    companion object {
+        val randomGenerator = Random()
+    }
 
     /**
      * Body measure index is calculated as kg / (m)².
@@ -61,7 +65,7 @@ class BodyMeasureReading(val weight: Float, val height: Int, val timestamp: Date
     /**
      * Constructor for creating a random test weight reading
      */
-    constructor(): this(40 + Random.nextFloat()*60, Random.nextInt(120, 200), Date())
+    constructor(): this((randomGenerator.nextGaussian()*15+60).toFloat(), (randomGenerator.nextGaussian()*10+170).toInt(), Date())
 
     /**
      * Constructor for creating a weight reading from a ContentValues object

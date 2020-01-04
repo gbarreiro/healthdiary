@@ -3,10 +3,14 @@ package com.guillermobarreiro.healthdiary.database
 import android.content.ContentValues
 import android.os.Bundle
 import android.provider.BaseColumns
-import java.util.*
-import kotlin.random.Random
+import java.util.Date
+import java.util.Random
 
 data class BloodPressureReading(val systolic: Int, val diastolic: Int, val timestamp: Date): DatabaseEntity {
+
+    companion object {
+        val randomGenerator = Random()
+    }
 
     enum class RiskLevel {NORMAL, ELEVATED, HIGH, HYPERTENSIVE}
 
@@ -43,7 +47,7 @@ data class BloodPressureReading(val systolic: Int, val diastolic: Int, val times
     /**
      * Constructor for creating a random test pressure reading
      */
-    constructor(): this(Random.nextInt(100, 180), Random.nextInt(60, 105), Date())
+    constructor(): this((randomGenerator.nextGaussian()*20+120).toInt(), (randomGenerator.nextGaussian()*20+70).toInt(), Date())
 
     /**
      * Constructor for creating a pressure reading from a ContentValues object

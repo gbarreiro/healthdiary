@@ -8,11 +8,15 @@
 
 import Foundation
 import CoreData
+import GameplayKit
 
 /**
     Represents a body measure reading, this means, the sampling of the user's weight and height in a specific moment. The weight is stored as a decimal number in kg, and the height as an integer in cm.
 */
 extension BodyMeasureReading {
+    
+    static let randomHeightGenerator = GKGaussianDistribution(randomSource: GKRandomSource(), mean: 170, deviation: 10)
+    static let randomWeightGenerator = GKGaussianDistribution(randomSource: GKRandomSource(), mean: 60, deviation: 15)
     
     enum BMILevel {
         case UNDERWEIGHT
@@ -56,8 +60,8 @@ extension BodyMeasureReading {
     convenience init(context: NSManagedObjectContext, timestamp: Date){
         self.init(context: context)
         self.timestamp = timestamp
-        self.height = Int16.random(in: 120...200)
-        self.weight = Float.random(in: 40...100)
+        self.height = Int16(BodyMeasureReading.randomHeightGenerator.nextInt())
+        self.weight = Float(BodyMeasureReading.randomWeightGenerator.nextInt())
     }
     
     /**

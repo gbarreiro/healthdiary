@@ -8,17 +8,23 @@
 
 import Foundation
 import CoreData
+import GameplayKit
 
 /**
     Represents a blood pressure reading, this means, the sampling of the user's systolic and diastolic blood pressure values in a specific moment. Both systolic and diastolic values are stored as Integer values, expressed in mmHg
 */
 extension BloodPressureReading {
+    
+    static let randomSystolicGenerator = GKGaussianDistribution(randomSource: GKRandomSource(), mean: 120, deviation: 20)
+    static let randomDiastolicGenerator = GKGaussianDistribution(randomSource: GKRandomSource(), mean: 70, deviation: 20)
+    
     enum RiskLevel {
         case NORMAL
         case ELEVATED
         case HIGH
         case HYPERTENSIVE
     }
+        
     
     /**
     Blood pressure risk level, based on heart.org ranges
@@ -47,8 +53,8 @@ extension BloodPressureReading {
         // Random diastolic and systolic values
         self.init(context: context)
         self.timestamp = timestamp
-        self.systolic = Int16.random(in: 100...180)
-        self.diastolic = Int16.random(in: 60...105)
+        self.systolic = Int16(BloodPressureReading.randomSystolicGenerator.nextInt())
+        self.diastolic = Int16(BloodPressureReading.randomDiastolicGenerator.nextInt())
     }
    
     /**
