@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Health Diary</string>
+    <string name="average_bmi">IMC medio:</string>
+    <string name="average_diastolic">DIástole media:</string>
+    <string name="average_height">Altura media (cm):</string>
+    <string name="average_systolic">Sístole media:</string>
+    <string name="average_weight">Peso medio (kg):</string>
+    <string name="blood_pressure">Presión sanguínea (mmHg):</string>
+    <string name="blood_pressure_detail">Lecturas de presión sanguínea</string>
+    <string name="blood_tab">Presión sanguínea</string>
+    <string name="bmi_label">IMC:</string>
+    <string name="body_measures_detail">Lecturas de medidas corporales:</string>
+    <string name="diastolic_label">Diástole:</string>
+    <string name="height_label">Altura:</string>
+    <string name="insert_diastolic">Diástole (mmHg):</string>
+    <string name="insert_height">Altura (cm):</string>
+    <string name="insert_systolic">Sístole (mmHg):</string>
+    <string name="insert_weight">Peso (kg):</string>
+    <string name="last_record">Último registro:</string>
+    <string name="last_record_blood_pressure">Último registro: presión sanguínea</string>
+    <string name="last_record_weight">Último registro: peso</string>
+    <string name="pressure_registered">Presión sanguínea registrada</string>
+    <string name="random_value">Valores aleatorios</string>
+    <string name="register_values">Registrar valores</string>
+    <string name="registered_weight">Peso registrado</string>
+    <string name="systolic_label">Sístole:</string>
+    <string name="weight_higher">El peso introducido es mayor que tu media</string>
+    <string name="weight_label">Peso:</string>
+    <string name="weight_tab">Peso</string>
+    <string name="weight_lower">El peso introducido es menor que tu media</string>
+</resources>

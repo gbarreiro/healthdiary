@@ -5,14 +5,14 @@
     <string name="last_record">Last record:</string>
     <string name="insert_weight">Weight (kg):</string>
     <string name="insert_height">Height (cm):</string>
-    <string name="empty_value">–</string>
+    <string name="empty_value" translatable="false">–</string>
     <string name="insert_diastolic">Diastolic (mmHg):</string>
     <string name="insert_systolic">Systolic (mmHg):</string>
-    <string name="weight_hint">78,6</string>
-    <string name="height_hint">175</string>
-    <string name="systolic_hint">120</string>
-    <string name="diastolic_hint">80</string>
-    <string name="random_value">Random value</string>
+    <string name="weight_hint" translatable="false">78,6</string>
+    <string name="height_hint" translatable="false">175</string>
+    <string name="systolic_hint" translatable="false">120</string>
+    <string name="diastolic_hint" translatable="false">80</string>
+    <string name="random_value">Random values</string>
     <string name="register_values">Register values</string>
     <string name="registered_weight">Weight registered</string>
     <string name="pressure_registered">Blood pressure registered</string>

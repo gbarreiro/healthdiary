@@ -1,0 +1,123 @@
+
+/* Class = "UILabel"; text = "Random values"; ObjectID = "2kx-sG-N0d"; */
+"2kx-sG-N0d.text" = "Valores aleatorios";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "5XA-3O-yTu"; */
+"5XA-3O-yTu.normalTitle" = "Registrar";
+
+/* Class = "UILabel"; text = "100"; ObjectID = "6wa-BQ-tUq"; */
+"6wa-BQ-tUq.text" = "100";
+
+/* Class = "UILabel"; text = "Systolic:"; ObjectID = "987-uO-wS0"; */
+"987-uO-wS0.text" = "Sístole:";
+
+/* Class = "UILabel"; text = "Average systolic:"; ObjectID = "9F0-op-Wl0"; */
+"9F0-op-Wl0.text" = "Sístole media:";
+
+/* Class = "UINavigationController"; title = "Blood pressure readings"; ObjectID = "BIj-We-9Dh"; */
+"BIj-We-9Dh.title" = "Lecturas de presión sanguínea";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "Bpp-ga-bIa"; */
+"Bpp-ga-bIa.text" = "120";
+
+/* Class = "UILabel"; text = "Diastolic:"; ObjectID = "Egv-7v-pVh"; */
+"Egv-7v-pVh.text" = "Diástole:";
+
+/* Class = "UITextField"; placeholder = "72.2"; ObjectID = "GfH-CQ-Ic7"; */
+"GfH-CQ-Ic7.placeholder" = "72.2";
+
+/* Class = "UILabel"; text = "Diastolic value (mmHg):"; ObjectID = "H8M-dd-Rcv"; */
+"H8M-dd-Rcv.text" = "Diástole (mmHg):";
+
+/* Class = "UILabel"; text = "Avg height:"; ObjectID = "HJt-pF-OAX"; */
+"HJt-pF-OAX.text" = "Altura media:";
+
+/* Class = "UILabel"; text = "19:20"; ObjectID = "IAl-Np-z7g"; */
+"IAl-Np-z7g.text" = "19:20";
+
+/* Class = "UILabel"; text = "Random values"; ObjectID = "Lkn-s1-ber"; */
+"Lkn-s1-ber.text" = "Valores aleatorios";
+
+/* Class = "UILabel"; text = "Avg weight:"; ObjectID = "OLC-Bu-cs2"; */
+"OLC-Bu-cs2.text" = "Peso medio:";
+
+/* Class = "UITextField"; placeholder = "80"; ObjectID = "Pbs-F9-qK4"; */
+"Pbs-F9-qK4.placeholder" = "80";
+
+/* Class = "UILabel"; text = "16th Jan"; ObjectID = "Rfl-Ey-mdV"; */
+"Rfl-Ey-mdV.text" = "16 de enero";
+
+/* Class = "UILabel"; text = "Weight:"; ObjectID = "UxR-Zp-1ny"; */
+"UxR-Zp-1ny.text" = "Peso:";
+
+/* Class = "UILabel"; text = "Height (cm):"; ObjectID = "X3f-wn-QfW"; */
+"X3f-wn-QfW.text" = "Altura (cm):";
+
+/* Class = "UILabel"; text = "–"; ObjectID = "XuH-mB-bKS"; */
+"XuH-mB-bKS.text" = "–";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "YrI-zZ-kOR"; */
+"YrI-zZ-kOR.text" = "120";
+
+/* Class = "UITextField"; placeholder = "120"; ObjectID = "ZK2-Ya-ZOQ"; */
+"ZK2-Ya-ZOQ.placeholder" = "120";
+
+/* Class = "UILabel"; text = "Height:"; ObjectID = "aXV-aj-iaI"; */
+"aXV-aj-iaI.text" = "Altura:";
+
+/* Class = "UITabBarItem"; title = "Blood Pressure"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Presión sanguínea";
+
+/* Class = "UILabel"; text = "Average diastolic:"; ObjectID = "cJl-Fw-REA"; */
+"cJl-Fw-REA.text" = "Diástole media:";
+
+/* Class = "UITabBarItem"; title = "Height & Weight"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Altura y peso";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "dOf-yg-CDW"; */
+"dOf-yg-CDW.normalTitle" = "Registrar";
+
+/* Class = "UITextField"; placeholder = "178"; ObjectID = "dnj-Fu-QJR"; */
+"dnj-Fu-QJR.placeholder" = "178";
+
+/* Class = "UILabel"; text = "Systolic value (mmHg):"; ObjectID = "gLZ-RB-ozn"; */
+"gLZ-RB-ozn.text" = "Sístole (mmHg):";
+
+/* Class = "UIBarButtonItem"; title = "Close"; ObjectID = "gx2-kp-fpo"; */
+"gx2-kp-fpo.title" = "Cerrar";
+
+/* Class = "UILabel"; text = "–"; ObjectID = "iCM-ld-W76"; */
+"iCM-ld-W76.text" = "–";
+
+/* Class = "UILabel"; text = "–"; ObjectID = "iVc-ad-LKM"; */
+"iVc-ad-LKM.text" = "–";
+
+/* Class = "UIBarButtonItem"; title = "Close"; ObjectID = "kWi-a6-eNh"; */
+"kWi-a6-eNh.title" = "Cerrar";
+
+/* Class = "UILabel"; text = "BMI:"; ObjectID = "kuY-Dc-htK"; */
+"kuY-Dc-htK.text" = "IMC:";
+
+/* Class = "UILabel"; text = "–"; ObjectID = "nnL-Bk-fKt"; */
+"nnL-Bk-fKt.text" = "–";
+
+/* Class = "UILabel"; text = "Weight (kg):"; ObjectID = "p6W-XE-rUa"; */
+"p6W-XE-rUa.text" = "Peso (kg):";
+
+/* Class = "UILabel"; text = "16th Jan"; ObjectID = "uzg-B6-MGL"; */
+"uzg-B6-MGL.text" = "16 de enero";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "vhW-bp-crV"; */
+"vhW-bp-crV.text" = "120";
+
+/* Class = "UILabel"; text = "Average BMI:"; ObjectID = "wXc-ik-uvM"; */
+"wXc-ik-uvM.text" = "IMC medio:";
+
+/* Class = "UILabel"; text = "–"; ObjectID = "xPT-rh-dOb"; */
+"xPT-rh-dOb.text" = "–";
+
+/* Class = "UILabel"; text = "100"; ObjectID = "xUi-PT-rgj"; */
+"xUi-PT-rgj.text" = "100";
+
+/* Class = "UILabel"; text = "19:20"; ObjectID = "zF5-2o-PrE"; */
+"zF5-2o-PrE.text" = "19:20";
