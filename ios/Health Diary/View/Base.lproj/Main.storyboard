@@ -96,7 +96,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="120" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-Ya-ZOQ">
+                                            <textField opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="120" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-Ya-ZOQ">
                                                 <rect key="frame" x="209.5" y="0.0" width="51.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
@@ -117,7 +117,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="80" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Pbs-F9-qK4">
+                                            <textField opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="80" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pbs-F9-qK4">
                                                 <rect key="frame" x="209.5" y="0.0" width="51.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
@@ -129,6 +129,9 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Pbs-F9-qK4" firstAttribute="leading" secondItem="ZK2-Ya-ZOQ" secondAttribute="leading" id="d74-gw-hAD"/>
+                                </constraints>
                                 <variation key="widthClass=regular" axis="horizontal"/>
                             </stackView>
                         </subviews>
@@ -421,7 +424,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="72.2" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GfH-CQ-Ic7">
+                                            <textField opaque="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="72.2" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GfH-CQ-Ic7">
                                                 <rect key="frame" x="122.5" y="0.0" width="56" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
@@ -436,13 +439,13 @@
                                         <rect key="frame" x="0.0" y="52" width="178.5" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height (cm):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3f-wn-QfW">
-                                                <rect key="frame" x="0.0" y="0.0" width="100.5" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="104.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="178" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dnj-Fu-QJR">
-                                                <rect key="frame" x="118.5" y="0.0" width="60" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="178" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dnj-Fu-QJR">
+                                                <rect key="frame" x="122.5" y="0.0" width="56" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
@@ -453,6 +456,9 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="dnj-Fu-QJR" firstAttribute="leading" secondItem="GfH-CQ-Ic7" secondAttribute="leading" id="5iS-o3-c9F"/>
+                                </constraints>
                                 <variation key="widthClass=regular" axis="horizontal"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="7QX-K4-GRK" userLabel="Random">
