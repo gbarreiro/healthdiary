@@ -29,7 +29,7 @@ class PageAdapter(fm: FragmentManager, val context: Context): FragmentPagerAdapt
         // Returns the name of the fragment corresponding to each tab
         return when (position){
             0 -> context.resources.getString(R.string.blood_tab)
-            1 -> context.resources.getString(R.string.weight_tab)
+            1 -> context.resources.getString(R.string.measures_tab)
             else -> null
         }
     }
