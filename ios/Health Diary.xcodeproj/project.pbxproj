@@ -22,6 +22,8 @@
 		998D41B623BD2CF8007860A7 /* HealthModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 998D41B423BD2CF8007860A7 /* HealthModel.xcdatamodeld */; };
 		999BC00223CF24D800EE5407 /* RiskColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BC00123CF24D800EE5407 /* RiskColors.swift */; };
 		999BC00423CF259400EE5407 /* CellDateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BC00323CF259400EE5407 /* CellDateFormat.swift */; };
+		999BC00623CF4A4600EE5407 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BC00523CF4A4600EE5407 /* UITextField+Extensions.swift */; };
+		999BC00823CF74D600EE5407 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BC00723CF74D600EE5407 /* MainViewController.swift */; };
 		99F1C37023B640E500284F8D /* BloodPressureDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */; };
 		99F1C37223B6647600284F8D /* BodyMeasuresDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C37123B6647600284F8D /* BodyMeasuresDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +47,8 @@
 		998D41B523BD2CF8007860A7 /* HealthModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthModel.xcdatamodel; sourceTree = "<group>"; };
 		999BC00123CF24D800EE5407 /* RiskColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskColors.swift; sourceTree = "<group>"; };
 		999BC00323CF259400EE5407 /* CellDateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDateFormat.swift; sourceTree = "<group>"; };
+		999BC00523CF4A4600EE5407 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		999BC00723CF74D600EE5407 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodPressureDetailViewController.swift; sourceTree = "<group>"; };
 		99F1C37123B6647600284F8D /* BodyMeasuresDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMeasuresDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +85,7 @@
 				9978CB4E23C369BA006C0547 /* BodyMeasureCell.swift */,
 				999BC00123CF24D800EE5407 /* RiskColors.swift */,
 				999BC00323CF259400EE5407 /* CellDateFormat.swift */,
+				999BC00523CF4A4600EE5407 /* UITextField+Extensions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -88,6 +93,7 @@
 		990CE3FB23AFBA680043B96A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				999BC00723CF74D600EE5407 /* MainViewController.swift */,
 				9948594923A02AC40041C3F9 /* BloodPressureMainViewController.swift */,
 				99F1C36F23B640E500284F8D /* BloodPressureDetailViewController.swift */,
 				9948594B23A02AC40041C3F9 /* BodyMeasuresMainViewController.swift */,
@@ -198,8 +204,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				999BC00423CF259400EE5407 /* CellDateFormat.swift in Sources */,
+				999BC00823CF74D600EE5407 /* MainViewController.swift in Sources */,
 				9978CB4F23C369BA006C0547 /* BodyMeasureCell.swift in Sources */,
 				9948594C23A02AC40041C3F9 /* BodyMeasuresMainViewController.swift in Sources */,
+				999BC00623CF4A4600EE5407 /* UITextField+Extensions.swift in Sources */,
 				9985883A23BF598100AE7333 /* BloodPressureReading+Extension.swift in Sources */,
 				99F1C37023B640E500284F8D /* BloodPressureDetailViewController.swift in Sources */,
 				9948594A23A02AC40041C3F9 /* BloodPressureMainViewController.swift in Sources */,

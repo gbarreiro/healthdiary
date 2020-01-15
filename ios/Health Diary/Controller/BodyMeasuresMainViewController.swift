@@ -19,8 +19,8 @@ import CoreData
 
    Through an IBAction, the text fields also trigger the `updateUIStatus()` function, in order to enable or disable the Register button.
 */
-class BodyMeasuresMainViewController: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
-    
+class BodyMeasuresMainViewController: UIViewController, MainViewController {    
+        
     // MARK: UIOutlets
     @IBOutlet weak var weightInput: UITextField!
     @IBOutlet weak var heightInput: UITextField!
@@ -35,7 +35,7 @@ class BodyMeasuresMainViewController: UIViewController, UITextFieldDelegate, NSF
     
     // The NSManagedObjectContext needed for creating and deleting objects is accessed through the shared singleton in `DataController.shared.viewContext`
     
-    private func setupFetchedResultsController() {
+    internal func setupFetchedResultsController() {
         if fetchedResultsController == nil { // avoids creating a new NSFetchedResultsController if one already exists
             let fetchRequest:NSFetchRequest<BodyMeasureReading> = BodyMeasureReading.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false) // shows the readings from newest to oldest
@@ -140,7 +140,7 @@ class BodyMeasuresMainViewController: UIViewController, UITextFieldDelegate, NSF
      This function is automatically called on the ViewController launch and by the NSFetchedResultsController every time a record is added or deleted.
      The records are read from the `NSFetchedResultsController`, and the average is calculated using the static method `BodyMeasureReading.calculateAverage()`.
      */
-    private func updateAverageValues() {
+    internal func updateAverageValues() {
         // Updates the average values
         let average = BodyMeasureReading.calculateAverage(records: fetchedResultsController.fetchedObjects ?? [])
         if let average = average {

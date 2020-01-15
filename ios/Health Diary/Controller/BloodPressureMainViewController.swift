@@ -19,7 +19,7 @@ import CoreData
  
     Through an IBAction, the text fields also trigger the `updateUIStatus()` function, in order to enable or disable the Register button.
  */
-class BloodPressureMainViewController: UIViewController, UITextFieldDelegate, NSFetchedResultsControllerDelegate {
+class BloodPressureMainViewController: UIViewController, MainViewController {
     
     // MARK: UIOutlets
     @IBOutlet weak var systolicInput: UITextField!
@@ -34,7 +34,7 @@ class BloodPressureMainViewController: UIViewController, UITextFieldDelegate, NS
     
     // The NSManagedObjectContext needed for creating and deleting objects is accessed through the shared singleton in `DataController.shared.viewContext`
     
-    private func setupFetchedResultsController() {
+    internal func setupFetchedResultsController() {
         if fetchedResultsController == nil { // avoids creating a new NSFetchedResultsController if one already exists
             let fetchRequest:NSFetchRequest<BloodPressureReading> = BloodPressureReading.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false) // shows the readings from newest to oldest
@@ -133,7 +133,7 @@ class BloodPressureMainViewController: UIViewController, UITextFieldDelegate, NS
      This function is automatically called on the ViewController launch and by the NSFetchedResultsController every time a record is added or deleted.
      The records are read from the `NSFetchedResultsController`, and the average is calculated using the static method `BloodPressureReading.calculateAverage()`.
      */
-    private func updateAverageValues() {
+    internal func updateAverageValues() {
         // Updates the average values
         let average = BloodPressureReading.calculateAverage(records: fetchedResultsController.fetchedObjects ?? [])
         if let average = average {
