@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Initialize singleton Data Controller
-        let dataController = DataController(modelName: "HealthModel")
-        DataController.shared = dataController
         DataController.shared.load()
         
         return true

@@ -9,16 +9,21 @@
 import UIKit
 import CoreData
 
+/**
+    Detail View Controller for Blood Pressure.
+    Shows a list with all the stored Blood Pressure records, showing the systolic and diastolic values, as well as the date when it was registered.
+ 
+    This View Controller reads the records from a NSFetchedResultsController, component which updates the UITableView every time a new record is added or deleted.
+ */
 class BloodPressureDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    
-    let dayFormatter: DateFormatter = DateFormatter()
-    let hourFormatter: DateFormatter = DateFormatter()
-    
+        
     // MARK: Data sources
     private var fetchedResultsController: NSFetchedResultsController<BloodPressureReading>!
     
+    // The NSManagedObjectContext needed for creating and deleting objects is accessed through the shared singleton in `DataController.shared.viewContext`
+    
     private func setupFetchedResultsController() {
-        if fetchedResultsController == nil {
+        if fetchedResultsController == nil { // avoids creating a new NSFetchedResultsController if one already exists
             let fetchRequest:NSFetchRequest<BloodPressureReading> = BloodPressureReading.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false) // shows the readings from newest to oldest
             fetchRequest.sortDescriptors = [sortDescriptor]
@@ -35,25 +40,25 @@ class BloodPressureDetailViewController: UITableViewController, NSFetchedResults
 
     }
 
+    // MARK: UIViewController lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Configures the date formatter
-        dayFormatter.dateStyle = .medium
-        dayFormatter.timeStyle = .none
-        hourFormatter.dateStyle = .none
-        hourFormatter.timeStyle = .short
         
         // Displays an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        // Set up FetchedResultsController
         setupFetchedResultsController()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Set up FetchedResultsController
         setupFetchedResultsController()
+        
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: false)
             tableView.reloadRows(at: [indexPath], with: .fade)
@@ -62,10 +67,13 @@ class BloodPressureDetailViewController: UITableViewController, NSFetchedResults
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        // Release FetchedResultsViewController
         fetchedResultsController = nil
     }
 
     @IBAction func closeViewController(_ sender: Any) {
+        // Dismiss the list and goes back to the MainVC
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -80,17 +88,10 @@ class BloodPressureDetailViewController: UITableViewController, NSFetchedResults
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Creates a cell and fills it with the blood pressure record data
         let cell = tableView.dequeueReusableCell(withIdentifier: "bloodPressureCell", for: indexPath) as! BloodPressureRecordCell
         let record = fetchedResultsController.object(at: indexPath)
-        
-        // Fills the cell with the data
-        let riskColor = BloodPressureViewController.riskColors[record.riskLevel]
-        cell.systolicValue.text = String(record.systolic) + " mmHg"
-        cell.diastolicValue.text = String(record.diastolic) + " mmHg"
-        cell.recordDate.text = dayFormatter.string(from: record.timestamp!)
-        cell.recordHour.text = hourFormatter.string(from: record.timestamp!)
-        cell.systolicValue.textColor = riskColor
-        cell.diastolicValue.textColor = riskColor
+        cell.loadReading(record: record)
 
         return cell
     }
@@ -130,12 +131,4 @@ class BloodPressureDetailViewController: UITableViewController, NSFetchedResults
         tableView.endUpdates()
     }
 
-}
-
-class BloodPressureRecordCell: UITableViewCell {
-    @IBOutlet weak var systolicValue: UILabel!
-    @IBOutlet weak var diastolicValue: UILabel!
-    @IBOutlet weak var recordDate: UILabel!
-    @IBOutlet weak var recordHour: UILabel!
-    
 }

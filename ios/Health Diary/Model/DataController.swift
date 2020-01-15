@@ -9,9 +9,15 @@
 import Foundation
 import CoreData
 
+/**
+    Class for managing all the operations related with persistance of data, using the CoreData framework.
+    The singleton `shared` must be loaded from the `AppDelegate`.
+ */
 class DataController {
     
-    public static var shared: DataController! // singleton, initialized from AppDelegate
+    private static let MODEL_NAME = "HealthModel"
+    
+    public static var shared: DataController = DataController(modelName: DataController.MODEL_NAME)// singleton
     
     let persistentContainer:NSPersistentContainer
     
@@ -21,7 +27,7 @@ class DataController {
     
     let backgroundContext:NSManagedObjectContext!
     
-    init(modelName:String) {
+    private init(modelName:String) {
         persistentContainer = NSPersistentContainer(name: modelName)
         
         backgroundContext = persistentContainer.newBackgroundContext()

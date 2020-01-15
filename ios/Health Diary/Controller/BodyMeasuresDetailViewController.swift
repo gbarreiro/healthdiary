@@ -9,16 +9,21 @@
 import UIKit
 import CoreData
 
+/**
+   Detail View Controller for Body Measure.
+   Shows a list with all the stored Body Measure records, showing the weight, height and BMI values, as well as the date when it was registered.
+
+   This View Controller reads the records from a NSFetchedResultsController, component which updates the UITableView every time a new record is added or deleted.
+*/
 class BodyMeasuresDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    
-    let dayFormatter: DateFormatter = DateFormatter()
-    let hourFormatter: DateFormatter = DateFormatter()
     
     // MARK: Data sources
     private var fetchedResultsController: NSFetchedResultsController<BodyMeasureReading>!
     
+    // The NSManagedObjectContext needed for creating and deleting objects is accessed through the shared singleton in `DataController.shared.viewContext`
+    
     private func setupFetchedResultsController() {
-        if fetchedResultsController == nil {
+        if fetchedResultsController == nil { // avoids creating a new NSFetchedResultsController if one already exists
             let fetchRequest:NSFetchRequest<BodyMeasureReading> = BodyMeasureReading.fetchRequest()
             let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false) // shows the readings from newest to oldest
             fetchRequest.sortDescriptors = [sortDescriptor]
@@ -35,25 +40,25 @@ class BodyMeasuresDetailViewController: UITableViewController, NSFetchedResultsC
 
     }
     
+    // MARK: UIViewController lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Configures the date formatter
-        dayFormatter.dateStyle = .medium
-        dayFormatter.timeStyle = .none
-        hourFormatter.dateStyle = .none
-        hourFormatter.timeStyle = .short
         
         // Displays an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        // Set up FetchedResultsController
         setupFetchedResultsController()
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Set up FetchedResultsController
         setupFetchedResultsController()
+        
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: false)
             tableView.reloadRows(at: [indexPath], with: .fade)
@@ -62,10 +67,13 @@ class BodyMeasuresDetailViewController: UITableViewController, NSFetchedResultsC
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        // Release FetchedResultsViewController
         fetchedResultsController = nil
     }
     
     @IBAction func closeViewController(_ sender: Any) {
+        // Dismiss the list and goes back to the MainVC
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -80,19 +88,12 @@ class BodyMeasuresDetailViewController: UITableViewController, NSFetchedResultsC
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Creates a cell and fills it with the body measure record data
         let cell = tableView.dequeueReusableCell(withIdentifier: "bodyMeasureCell", for: indexPath) as! BodyMeasureRecordCell
         let record = fetchedResultsController.object(at: indexPath)
         
         // Fills the cell with the data
-        let riskColor = BodyMeasuresViewController.riskColors[record.bmiLevel]
-        cell.weight.text = String(format: "%.1f", record.weight) + " kg"
-        cell.height.text = String(record.height) + " cm"
-        cell.bmi.text = String(format: "%.1f", record.bmi)
-        cell.recordDate.text = dayFormatter.string(from: record.timestamp!)
-        cell.recordHour.text = hourFormatter.string(from: record.timestamp!)
-        cell.weight.textColor = riskColor
-        cell.height.textColor = riskColor
-        cell.bmi.textColor = riskColor
+        cell.loadReading(record: record)
 
         return cell
     }
@@ -132,14 +133,4 @@ class BodyMeasuresDetailViewController: UITableViewController, NSFetchedResultsC
         tableView.endUpdates()
     }
 
-}
-
-
-class BodyMeasureRecordCell: UITableViewCell {
-    @IBOutlet weak var weight: UILabel!
-    @IBOutlet weak var height: UILabel!
-    @IBOutlet weak var bmi: UILabel!
-    @IBOutlet weak var recordDate: UILabel!
-    @IBOutlet weak var recordHour: UILabel!
-    
 }
