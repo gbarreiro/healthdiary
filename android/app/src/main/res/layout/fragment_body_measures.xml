@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:padding="8dp"
-    tools:context=".views.BodyMeasureFragment">
+    tools:context=".views.BodyMeasuresFragment">
 
     <TextView
         android:id="@+id/insert_weight_label"

@@ -16,7 +16,7 @@ class PageAdapter(fm: FragmentManager, val context: Context): FragmentPagerAdapt
         // Returns the desired fragment for each tab
         return when (position){
             0 -> {BloodPressureFragment()}
-            1 -> {BodyMeasureFragment()}
+            1 -> {BodyMeasuresFragment()}
             else -> Fragment()
         }
     }

@@ -6,14 +6,30 @@ import android.provider.BaseColumns
 import java.util.Date
 import java.util.Random
 
+/**
+ * Represents a blood pressure reading, this means,
+ * the sampling of the user's systolic and diastolic blood pressure values in a specific moment.
+ *
+ * Both systolic and diastolic values are stored as Integer values, expressed in mmHg.
+ *
+ */
 data class BloodPressureReading(val systolic: Int, val diastolic: Int, val timestamp: Date): DatabaseEntity {
 
     companion object {
-        val randomGenerator = Random()
+        val randomGenerator = Random() // needed for creating random gaussian values
     }
 
     enum class RiskLevel {NORMAL, ELEVATED, HIGH, HYPERTENSIVE}
 
+    /**
+        Blood pressure risk level, based on <a href="https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings">heart.org</a> ranges.
+
+        Risk levels:
+         - Systolic < 120 and Diastolic < 80: Normal
+         - Systolic < 129 and Diastolic < 80: Elevated
+         - Systolic < 180 and Diastolic < 120: High
+         - Systolic > 180 and Diastolic > 120: Hypertensive
+     */
     val riskLevel = when {
         systolic < 120 && diastolic < 80 -> RiskLevel.NORMAL
         systolic < 129  && diastolic < 80 -> RiskLevel.ELEVATED
@@ -48,18 +64,6 @@ data class BloodPressureReading(val systolic: Int, val diastolic: Int, val times
      * Constructor for creating a random test pressure reading
      */
     constructor(): this((randomGenerator.nextGaussian()*20+120).toInt(), (randomGenerator.nextGaussian()*20+70).toInt(), Date())
-
-    /**
-     * Constructor for creating a pressure reading from a ContentValues object
-     */
-    constructor(values: ContentValues):this(values.getAsInteger(DatabaseEntry.COLUMN_SYSTOLIC), values.getAsInteger(DatabaseEntry.COLUMN_DIASTOLIC),
-        Date(values.getAsLong(DatabaseEntry.COLUMN_TIMESTAMP)))
-
-    /**
-     * Constructor for creating a pressure reading from a Bundle object
-     */
-    constructor(bundle: Bundle):this(bundle.getInt(DatabaseEntry.COLUMN_SYSTOLIC), bundle.getInt(DatabaseEntry.COLUMN_DIASTOLIC),
-        Date(bundle.getLong(DatabaseEntry.COLUMN_TIMESTAMP)))
 
     /**
      * Contract for transforming the Blood Pressure readings from and into the database

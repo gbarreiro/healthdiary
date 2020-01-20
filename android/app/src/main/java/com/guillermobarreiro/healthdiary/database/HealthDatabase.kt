@@ -6,24 +6,16 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 import java.util.*
 
-private const val CREATE_BODY_MEASURES_TABLE = "CREATE TABLE ${BodyMeasureReading.DatabaseEntry.TABLE_NAME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${BodyMeasureReading.DatabaseEntry.COLUMN_WEIGHT} REAL, ${BodyMeasureReading.DatabaseEntry.COLUMN_HEIGHT} INTEGER, ${BodyMeasureReading.DatabaseEntry.COLUMN_TIMESTAMP} INTEGER)"
-private const val CREATE_BLOOD_PRESSURE_TABLE = "CREATE TABLE ${BloodPressureReading.DatabaseEntry.TABLE_NAME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${BloodPressureReading.DatabaseEntry.COLUMN_SYSTOLIC} INTEGER, ${BloodPressureReading.DatabaseEntry.COLUMN_DIASTOLIC} INTEGER, ${BloodPressureReading.DatabaseEntry.COLUMN_TIMESTAMP} INTEGER)"
-
 /**
- * Helper for connecting and working with the DB.
+ * SQLite database that stores the blood pressure and body measures readings.
+ * This is a helper for connecting with the DB and reading and writing readings from/to it.
  */
 class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    /**
-     * Names of the two tables existing in the DB
-     */
-    enum class DatabaseTables(val table: String) {
-        WEIGHT(BodyMeasureReading.DatabaseEntry.TABLE_NAME),
-        BLOOD_PRESSURE(BloodPressureReading.DatabaseEntry.TABLE_NAME)
-    }
+    //region Database creation
 
     /**
-     * Initializes the DB
+     * Creates the database. This is run if no database exists yet.
      */
     override fun onCreate(db: SQLiteDatabase?) {
         // Creates the weight and blood pressure tables
@@ -35,18 +27,28 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         // do nothing
     }
 
+    //endregion
+
+    //region Write into database
+
     /**
-     * Inserts a new record in the DB.
-     * @param record object implementing DatabaseEntity
-     * @param table Table where the record will be stored
+     * Inserts a new record in the database. The record must be an object implementing the interface DatabaseEntity,
+     * this is, a BloodPressureReading or BodyMeasuresReading object.
+     * @param record Blood pressure or body measures reading we want to store on the database.
+     * @param table Table where the record will be stored: DatabaseTables.BODY_MEASURES for body measures, or DatabaseTables.BLOOD_PRESSURE for blood pressure reading.
      */
     fun insertRecord(record: DatabaseEntity, table: DatabaseTables){
         val db = this.writableDatabase
         db?.insert(table.table, null, record.values)
     }
 
+    //endregion
+
+    //region Read from database
+
     /**
-     * Returns an array with all the blood pressure readings stored in the DB
+     * Returns an array with all the blood pressure readings stored in the database.
+     * The readings are returned as BloodPressureReading objects.
      */
     fun getBloodPressureRecords(): Array<BloodPressureReading> {
         val db = this.readableDatabase
@@ -96,10 +98,33 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     /**
+     * Returns an array with all the body measures readings stored in the database.
+     * The readings are returned as BodyMeasureReading objects.
+     */
+    fun getBodyMeasureRecords(): Array<BodyMeasuresReading>{
+        val db = this.readableDatabase
+        val cursor = db.query(DatabaseTables.BODY_MEASURES.table, null, null, null, null, null, "${BodyMeasuresReading.DatabaseEntry.COLUMN_TIMESTAMP} DESC")
+
+        // Iterates through the cursor, for converting each entry into an object and store it into the array
+        val records = mutableListOf<BodyMeasuresReading>()
+        with(cursor){
+            while(moveToNext()) {
+                val weight = getFloat(getColumnIndex(BodyMeasuresReading.DatabaseEntry.COLUMN_WEIGHT))
+                val height = getInt(getColumnIndex(BodyMeasuresReading.DatabaseEntry.COLUMN_HEIGHT))
+                val timestamp = getLong(getColumnIndex(BodyMeasuresReading.DatabaseEntry.COLUMN_TIMESTAMP))
+                val reading = BodyMeasuresReading(weight, height, Date(timestamp))
+                records.add(reading)
+            }
+        }
+
+        return records.toTypedArray() // returns the array
+    }
+
+    /**
      * Calculates the mean weight and height values of the readings stored in the DB, and returns it as a new BodyMeasureReading object
      * @return BodyMeasureReading object with the mean value and the current timestamp
      */
-    fun calculateBodyMeasureMean(): BodyMeasureReading? {
+    fun calculateBodyMeasureMean(): BodyMeasuresReading? {
         val records = getBodyMeasureRecords()
         var weight = 0.0
         var height = 0
@@ -113,7 +138,7 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             weight /= records.size
             height /= records.size
 
-            return BodyMeasureReading(weight.toFloat(), height)
+            return BodyMeasuresReading(weight.toFloat(), height)
         }else{
             return null
         }
@@ -121,28 +146,17 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
     }
 
+    //endregion
+
+    //region Database structure
+
     /**
-     * Returns an array with all the body measures readings stored in the DB
+     * Names of the two tables existing in the DB
      */
-    fun getBodyMeasureRecords(): Array<BodyMeasureReading>{
-        val db = this.readableDatabase
-        val cursor = db.query(DatabaseTables.WEIGHT.table, null, null, null, null, null, "${BodyMeasureReading.DatabaseEntry.COLUMN_TIMESTAMP} DESC")
-
-        // Iterates through the cursor, for converting each entry into an object and store it into the array
-        val records = mutableListOf<BodyMeasureReading>()
-        with(cursor){
-            while(moveToNext()) {
-                val weight = getFloat(getColumnIndex(BodyMeasureReading.DatabaseEntry.COLUMN_WEIGHT))
-                val height = getInt(getColumnIndex(BodyMeasureReading.DatabaseEntry.COLUMN_HEIGHT))
-                val timestamp = getLong(getColumnIndex(BodyMeasureReading.DatabaseEntry.COLUMN_TIMESTAMP))
-                val reading = BodyMeasureReading(weight, height, Date(timestamp))
-                records.add(reading)
-            }
-        }
-
-        return records.toTypedArray() // returns the array
+    enum class DatabaseTables(val table: String) {
+        BODY_MEASURES(BodyMeasuresReading.DatabaseEntry.TABLE_NAME),
+        BLOOD_PRESSURE(BloodPressureReading.DatabaseEntry.TABLE_NAME)
     }
-
 
     /**
      * Static parameters for creating the DB
@@ -150,6 +164,10 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
     companion object{
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "HealthDiary.db"
+        private const val CREATE_BODY_MEASURES_TABLE = "CREATE TABLE ${BodyMeasuresReading.DatabaseEntry.TABLE_NAME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${BodyMeasuresReading.DatabaseEntry.COLUMN_WEIGHT} REAL, ${BodyMeasuresReading.DatabaseEntry.COLUMN_HEIGHT} INTEGER, ${BodyMeasuresReading.DatabaseEntry.COLUMN_TIMESTAMP} INTEGER)"
+        private const val CREATE_BLOOD_PRESSURE_TABLE = "CREATE TABLE ${BloodPressureReading.DatabaseEntry.TABLE_NAME} (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${BloodPressureReading.DatabaseEntry.COLUMN_SYSTOLIC} INTEGER, ${BloodPressureReading.DatabaseEntry.COLUMN_DIASTOLIC} INTEGER, ${BloodPressureReading.DatabaseEntry.COLUMN_TIMESTAMP} INTEGER)"
     }
+
+    //endregion
 
 }

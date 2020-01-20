@@ -9,12 +9,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.guillermobarreiro.healthdiary.R
 
-class BloodPressureReadingsAdapter(private val context: Context, private val database: HealthDatabase): RecyclerView.Adapter<BloodPressureReadingsAdapter.RecordViewHolder>() {
 
+/**
+ * RecyclerViewAdapter for BloodPressureReading objects.
+ * Allows the display of the info from a BloodPressureReading on a cell in a list (RecyclerView).
+ */
+class BloodPressureReadingsAdapter(private val context: Context, database: HealthDatabase): RecyclerView.Adapter<BloodPressureReadingsAdapter.RecordViewHolder>() {
+
+    //region Date formatters
     private val dayFormatter: DateFormat = android.text.format.DateFormat.getMediumDateFormat(context)
     private val hourFormatter: DateFormat = android.text.format.DateFormat.getTimeFormat(context)
+    //endregion
 
-    private val bloodPressureRecords: Array<BloodPressureReading> = database.getBloodPressureRecords()
+    //region Risk colors
     private val riskColors = mutableMapOf<BloodPressureReading.RiskLevel, Int>().apply {
         // Sets up the risk colors dictionary
         this[BloodPressureReading.RiskLevel.NORMAL] = context.resources.getColor(android.R.color.holo_green_dark)
@@ -22,19 +29,26 @@ class BloodPressureReadingsAdapter(private val context: Context, private val dat
         this[BloodPressureReading.RiskLevel.HIGH] = context.resources.getColor(android.R.color.holo_orange_dark)
         this[BloodPressureReading.RiskLevel.HYPERTENSIVE] = context.resources.getColor(android.R.color.holo_red_dark)
     }
+    //endregion
+
+    //region Data source
+    private val bloodPressureRecords: Array<BloodPressureReading> = database.getBloodPressureRecords()
+    //endregion
 
 
     /*  Provide a reference to the views for each data item
         Complex data items may need more than one view per item, and
         you provide access to all the views for a data item in a view holder
     */
-    class RecordViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    class RecordViewHolder(view: View): RecyclerView.ViewHolder(view){
         val systolicValue: TextView = view.findViewById(R.id.cell_systolic_value)
         val diastolicValue: TextView = view.findViewById(R.id.cell_diastolic_value)
         val recordDateDay: TextView = view.findViewById(R.id.cell_blood_pressure_day)
         val recordDateHour: TextView = view.findViewById(R.id.cell_blood_pressure_hour)
 
     }
+
+    //region Adapter methods
 
     // Create a new view (cell) (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
@@ -45,9 +59,10 @@ class BloodPressureReadingsAdapter(private val context: Context, private val dat
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
+        // Get element from your dataset at this position
         val record = bloodPressureRecords[position]
+
+        // Fill the UI with the reading data
         val diastolic = record.diastolic.toString() + " mmHg"
         val systolic = record.systolic.toString() + " mmHg"
         val day = dayFormatter.format(record.timestamp)
@@ -65,5 +80,7 @@ class BloodPressureReadingsAdapter(private val context: Context, private val dat
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = bloodPressureRecords.size
+
+    //endregion
 
 }

@@ -14,9 +14,13 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.guillermobarreiro.healthdiary.R
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
-import com.guillermobarreiro.healthdiary.database.BodyMeasureReading
+import com.guillermobarreiro.healthdiary.database.BodyMeasuresReading
 
-class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
+/**
+ * Fragment for registering new body measures readings and see the average values.
+ * This fragment is embedded into the MainActivity.
+ */
+class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
 
     //region Activity views
     private lateinit var randomSwitch: Switch
@@ -30,20 +34,20 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
     //endregion
 
     //region Datasources
-    private var meanValues: BodyMeasureReading? = null
+    private var meanValues: BodyMeasuresReading? = null
     private lateinit var db: HealthDatabase
     //endregion
 
-    private val riskColors = mutableMapOf<BodyMeasureReading.BMILevel, Int>()
+    private val riskColors = mutableMapOf<BodyMeasuresReading.BMILevel, Int>()
 
-
+    //region Fragment lifecycle
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflates the layout for this fragment
-        return inflater.inflate(R.layout.fragment_body_measure, container, false)
+        return inflater.inflate(R.layout.fragment_body_measures, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,13 +64,13 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
         averageBmi = view.findViewById(R.id.avg_bmi)
 
         // Sets up the risk colors dictionary
-        riskColors[BodyMeasureReading.BMILevel.UNDERWEIGHT] = resources.getColor(android.R.color.holo_orange_dark)
-        riskColors[BodyMeasureReading.BMILevel.HEALTHY] = resources.getColor(android.R.color.holo_green_dark)
-        riskColors[BodyMeasureReading.BMILevel.OVERWEIGHT] = resources.getColor(android.R.color.holo_orange_dark)
-        riskColors[BodyMeasureReading.BMILevel.OBESE] = resources.getColor(android.R.color.holo_red_dark)
+        riskColors[BodyMeasuresReading.BMILevel.UNDERWEIGHT] = resources.getColor(android.R.color.holo_orange_dark)
+        riskColors[BodyMeasuresReading.BMILevel.HEALTHY] = resources.getColor(android.R.color.holo_green_dark)
+        riskColors[BodyMeasuresReading.BMILevel.OVERWEIGHT] = resources.getColor(android.R.color.holo_orange_dark)
+        riskColors[BodyMeasuresReading.BMILevel.OBESE] = resources.getColor(android.R.color.holo_red_dark)
 
         // Sets the onClick listeners
-        registerButton.setOnClickListener { this.registerWeight() }
+        registerButton.setOnClickListener { this.registerBodyMeasures() }
         randomSwitch.setOnClickListener { this.switchChanged() }
         averageCard.setOnClickListener { this.showRecords() }
 
@@ -82,17 +86,30 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
 
     }
 
-    // Launched when the "Register value" button is clicked
-    private fun registerWeight(){
-        val lastBodyMeasure: BodyMeasureReading?
+    override fun onDestroy() {
+        // Removes the connection to the DB
+        db.close()
+        super.onDestroy()
+    }
+
+    //endregion
+
+    //region Data reading and writing
+
+    /**
+     * Register the weight and height of the user into the DB, and update the mean values.
+     * Launched when the "Register value" button is clicked.
+     */
+    private fun registerBodyMeasures(){
+        val lastBodyMeasures: BodyMeasuresReading?
         if(randomSwitch.isChecked){
             // Inserts a random weight
-            lastBodyMeasure = BodyMeasureReading()
+            lastBodyMeasures = BodyMeasuresReading()
         }else {
             // Registers the inserted weight
             val myWeight = insertedWeight.text.toString().toFloat()
             val myHeight = insertedHeight.text.toString().toInt()
-            lastBodyMeasure = BodyMeasureReading(myWeight, myHeight)
+            lastBodyMeasures = BodyMeasuresReading(myWeight, myHeight)
         }
 
         // Clears the input
@@ -101,14 +118,14 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
 
         // Compares the record with the mean
         if(meanValues != null){
-            val weightComparison = if(lastBodyMeasure.weight > meanValues!!.weight) R.string.weight_higher else R.string.weight_lower
+            val weightComparison = if(lastBodyMeasures.weight > meanValues!!.weight) R.string.weight_higher else R.string.weight_lower
 
             // Notifies the user about the comparison of the introduced weight with the average
             Toast.makeText(context, weightComparison, Toast.LENGTH_LONG).show()
         }
 
         // Registers the new record in the DB
-        db.insertRecord(lastBodyMeasure, HealthDatabase.DatabaseTables.WEIGHT)
+        db.insertRecord(lastBodyMeasures, HealthDatabase.DatabaseTables.BODY_MEASURES)
 
         // Updates the mean values
         updateMean()
@@ -116,6 +133,9 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
 
     }
 
+    /**
+     * Update the displayed mean values.
+     */
     private fun updateMean(){
         meanValues = db.calculateBodyMeasureMean()
         if(meanValues!=null){
@@ -133,27 +153,27 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
 
     }
 
+    /**
+     * Open a BodyMeasuresDetailActivity for showing a list with all the records.
+     */
     private fun showRecords(){
         val intent = Intent(context, BodyMeasuresDetailActivity::class.java)
         startActivity(intent)
     }
 
-    // Launched when the "random values" switch is toggled
+    //endregion
+
+
+    //region User interaction
+    /**
+     * Enables or disables the input text fields.
+     * Launched when the "random values" switch is toggled.
+     */
     private fun switchChanged(){
-        // Enables or disables the insertedWeight text field
         insertedWeight.isEnabled = !(randomSwitch.isChecked)
         registerButton.isEnabled = randomSwitch.isChecked || insertedWeight.text.isNotEmpty()
 
     }
-
-    override fun onDestroy() {
-        // Removes the connection to the DB
-        db.close()
-        super.onDestroy()
-    }
-
-
-    //region TextWatcher & EditorAction methods
 
     override fun afterTextChanged(s: Editable?) {
         // Nothing to do
@@ -171,7 +191,7 @@ class BodyMeasureFragment : Fragment(), TextWatcher, TextView.OnEditorActionList
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
         if(actionId == EditorInfo.IME_ACTION_GO){ // if the user presses enter button
             // Registers the weight
-            registerWeight()
+            registerBodyMeasures()
         }
         return true
     }

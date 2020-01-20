@@ -9,6 +9,10 @@ import com.guillermobarreiro.healthdiary.database.BloodPressureReadingsAdapter
 import com.guillermobarreiro.healthdiary.database.BodyMeasuresReadingsAdapter
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
 
+/**
+ * Detail activity for displaying all the stored body measures records.
+ * The records are displayed in a RecyclerView using the BodyMeasuresReadingsAdapter.
+ */
 class BodyMeasuresDetailActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView

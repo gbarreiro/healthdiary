@@ -11,10 +11,10 @@ import kotlin.math.pow
  * Represents a body measure reading, this means, the sampling of the user's weight and height in a specific moment.
  * The weight is stored as a decimal number in kg, and the height as an integer in cm.
  */
-class BodyMeasureReading(val weight: Float, val height: Int, val timestamp: Date) : DatabaseEntity {
+class BodyMeasuresReading(val weight: Float, val height: Int, val timestamp: Date) : DatabaseEntity {
 
     companion object {
-        val randomGenerator = Random()
+        val randomGenerator = Random() // needed for generating gaussian random values
     }
 
     /**
@@ -66,20 +66,6 @@ class BodyMeasureReading(val weight: Float, val height: Int, val timestamp: Date
      * Constructor for creating a random test weight reading
      */
     constructor(): this((randomGenerator.nextGaussian()*15+60).toFloat(), (randomGenerator.nextGaussian()*10+170).toInt(), Date())
-
-    /**
-     * Constructor for creating a weight reading from a ContentValues object
-     */
-    constructor(values: ContentValues):this(values.getAsFloat(DatabaseEntry.COLUMN_WEIGHT),
-        values.getAsInteger(DatabaseEntry.COLUMN_HEIGHT),
-        Date(values.getAsLong(DatabaseEntry.COLUMN_TIMESTAMP)))
-
-    /**
-     * Constructor for creating a weight reading from a Bundle object
-     */
-    constructor(bundle: Bundle):this(bundle.getFloat(DatabaseEntry.COLUMN_WEIGHT),
-        bundle.getInt(DatabaseEntry.COLUMN_HEIGHT),
-        Date(bundle.getLong(DatabaseEntry.COLUMN_TIMESTAMP)))
 
     /**
      * Contract for transforming the weight readings from and into the database

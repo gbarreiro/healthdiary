@@ -16,7 +16,10 @@ import com.guillermobarreiro.healthdiary.R
 import com.guillermobarreiro.healthdiary.database.BloodPressureReading
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
 
-
+/**
+ * Fragment for registering new blood pressure readings and see the average values.
+ * This fragment is embedded into the MainActivity.
+ */
 class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener {
 
     //region Activity views
@@ -36,6 +39,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
 
     private val riskColors = mutableMapOf<BloodPressureReading.RiskLevel, Int>()
 
+    //region Fragment lifecycle
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -81,7 +85,20 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
 
     }
 
-    // Launched when the "Register values" button is clicked
+    override fun onDestroy() {
+        // Removes the connection to the DB
+        db.close()
+        super.onDestroy()
+    }
+
+    //endregion
+
+    //region Data reading and writing
+
+    /**
+     * Register the blood pressure of the user into the DB, and update the mean values.
+     * Launched when the "Register value" button is clicked.
+     */
     private fun registerPressure(){
         val lastBloodPressure: BloodPressureReading?
         if(randomSwitch.isChecked){
@@ -108,6 +125,9 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
 
     }
 
+    /**
+     * Update the displayed mean values.
+     */
     private fun updateMean(){
         this.meanValues = db.calculateBloodPressureMean()
         if(this.meanValues!=null){
@@ -123,29 +143,27 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
 
     }
 
+    /**
+     * Open a BodyMeasuresDetailActivity for showing a list with all the records.
+     */
     private fun showRecords(){
         val intent = Intent(context, BloodPressureDetailActivity::class.java)
         startActivity(intent)
     }
 
-    // Launched when the "random values" switch is toggled
+    //endregion
+
+    //region User interaction
+    /**
+     * Enables or disables the input text fields.
+     * Launched when the "random values" switch is toggled.
+     */
     private fun switchChanged(){
-        // Enables or disables the inserted values text fields
         insertedDiastolic.isEnabled = !(randomSwitch.isChecked)
         insertedSystolic.isEnabled = !(randomSwitch.isChecked)
         registerButton.isEnabled = randomSwitch.isChecked || (insertedSystolic.text.isNotEmpty() && insertedDiastolic.text.isNotEmpty())
 
     }
-
-
-    override fun onDestroy() {
-        // Removes the connection to the DB
-        db.close()
-        super.onDestroy()
-    }
-
-
-    //region TextWatcher & EditorAction methods
 
     override fun afterTextChanged(s: Editable?) {
         // Nothing to do

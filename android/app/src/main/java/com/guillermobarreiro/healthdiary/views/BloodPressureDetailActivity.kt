@@ -8,6 +8,10 @@ import com.guillermobarreiro.healthdiary.R
 import com.guillermobarreiro.healthdiary.database.BloodPressureReadingsAdapter
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
 
+/**
+ * Detail activity for displaying all the stored blood pressure records.
+ * The records are displayed in a RecyclerView using the BloodPressureReadingsAdapter.
+ */
 class BloodPressureDetailActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
