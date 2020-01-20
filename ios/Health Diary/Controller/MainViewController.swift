@@ -36,15 +36,15 @@ protocol MainViewController: UITextFieldDelegate, NSFetchedResultsControllerDele
     // MARK: Data reading and writing
 
     /**
-     Saves on the database the introduced or random generated body measures values.
+     Saves on the database the introduced or random generated values.
      */
     func registerValues()
     
     /**
-     Updates the average body measures values displayed on the UI.
+     Updates the average values displayed on the UI.
      
      This function is automatically called on the ViewController launch and by the NSFetchedResultsController every time a record is added or deleted.
-     The records are read from the `NSFetchedResultsController`, and the average is calculated using the static method `BodyMeasureReading.calculateAverage()`.
+     The records are read from the `NSFetchedResultsController`, and the average is calculated using the static method `calculateAverage()`.
      */
     func updateAverageValues()
 }
