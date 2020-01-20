@@ -11,8 +11,8 @@ import com.guillermobarreiro.healthdiary.R
 
 
 /**
- * RecyclerViewAdapter for BloodPressureReading objects.
- * Allows the display of the info from a BloodPressureReading on a cell in a list (RecyclerView).
+ * [RecyclerViewAdapter] for [BloodPressureReading] objects.
+ * Allows the display of the info from a [BloodPressureReading] on a cell in a list ([RecyclerView]).
  */
 class BloodPressureReadingsAdapter(private val context: Context, database: HealthDatabase): RecyclerView.Adapter<BloodPressureReadingsAdapter.RecordViewHolder>() {
 

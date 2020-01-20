@@ -40,7 +40,7 @@ class BodyMeasuresReading(val weight: Float, val height: Int, val timestamp: Dat
 
 
     /**
-     * Object representation as a ContentValues key-value dictionary
+     * Object representation as a [ContentValues] key-value dictionary
      */
     override val values = ContentValues().apply {
         put(DatabaseEntry.COLUMN_WEIGHT, weight)
@@ -49,7 +49,7 @@ class BodyMeasuresReading(val weight: Float, val height: Int, val timestamp: Dat
     }
 
     /**
-     * Object representation as a ContentValues key-value dictionary
+     * Object representation as a [ContentValues] key-value dictionary
      */
     override val bundle = Bundle().apply {
         putFloat(DatabaseEntry.COLUMN_WEIGHT, weight)

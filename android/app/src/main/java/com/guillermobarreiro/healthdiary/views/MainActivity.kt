@@ -7,7 +7,7 @@ import com.google.android.material.tabs.TabLayout
 import com.guillermobarreiro.healthdiary.R
 
 /**
- * Launch activity of the app. This activity has two tabs: Blood Pressure (BloodPressureFragment) and Body Measures (BodyMeasuresFragment).
+ * Launch activity of the app. This activity has two tabs: Blood Pressure ([BloodPressureFragment]) and Body Measures ([BodyMeasuresFragment]).
  */
 class MainActivity : AppCompatActivity() {
 

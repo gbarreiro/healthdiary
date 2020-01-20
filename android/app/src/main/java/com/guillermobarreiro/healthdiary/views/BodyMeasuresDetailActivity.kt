@@ -11,7 +11,7 @@ import com.guillermobarreiro.healthdiary.database.HealthDatabase
 
 /**
  * Detail activity for displaying all the stored body measures records.
- * The records are displayed in a RecyclerView using the BodyMeasuresReadingsAdapter.
+ * The records are displayed in a [RecyclerView] using the [BodyMeasuresReadingsAdapter].
  */
 class BodyMeasuresDetailActivity : AppCompatActivity() {
 

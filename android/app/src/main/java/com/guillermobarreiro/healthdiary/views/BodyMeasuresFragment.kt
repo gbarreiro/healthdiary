@@ -18,7 +18,7 @@ import com.guillermobarreiro.healthdiary.database.BodyMeasuresReading
 
 /**
  * Fragment for registering new body measures readings and see the average values.
- * This fragment is embedded into the MainActivity.
+ * This fragment is embedded into the [MainActivity].
  */
 class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
 

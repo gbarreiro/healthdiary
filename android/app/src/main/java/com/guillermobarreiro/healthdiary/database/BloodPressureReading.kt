@@ -38,7 +38,7 @@ data class BloodPressureReading(val systolic: Int, val diastolic: Int, val times
     }
 
     /**
-     * Object representation as a ContentValues key-value dictionary
+     * Object representation as a [ContentValues] key-value dictionary
      */
     override val values = ContentValues().apply {
         put(DatabaseEntry.COLUMN_DIASTOLIC, diastolic)
@@ -47,7 +47,7 @@ data class BloodPressureReading(val systolic: Int, val diastolic: Int, val times
     }
 
     /**
-     * Object representation as a Bundle key-value dictionary
+     * Object representation as a [Bundle] key-value dictionary
      */
     override val bundle = Bundle().apply {
         putInt(DatabaseEntry.COLUMN_DIASTOLIC, diastolic)

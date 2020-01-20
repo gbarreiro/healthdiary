@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.guillermobarreiro.healthdiary.R
 
 /**
- * Class for managing the two Fragments shown in the MainActivity.
- * In tab 0: BloodPressureFragment
- * In tab 1: BodyMeasureFragment
+ * Class for managing the two Fragments shown in the [MainActivity].
+ * In tab 0: [BloodPressureFragment]
+ * In tab 1: [BodyMeasureFragment]
  */
 class PageAdapter(fm: FragmentManager, val context: Context): FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {

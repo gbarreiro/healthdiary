@@ -18,7 +18,7 @@ import com.guillermobarreiro.healthdiary.database.HealthDatabase
 
 /**
  * Fragment for registering new blood pressure readings and see the average values.
- * This fragment is embedded into the MainActivity.
+ * This fragment is embedded into the [MainActivity].
  */
 class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener {
 

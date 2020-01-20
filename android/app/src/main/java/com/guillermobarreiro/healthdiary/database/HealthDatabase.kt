@@ -33,9 +33,9 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
     /**
      * Inserts a new record in the database. The record must be an object implementing the interface DatabaseEntity,
-     * this is, a BloodPressureReading or BodyMeasuresReading object.
+     * this is, a [BloodPressureReading] or [BodyMeasuresReading] object.
      * @param record Blood pressure or body measures reading we want to store on the database.
-     * @param table Table where the record will be stored: DatabaseTables.BODY_MEASURES for body measures, or DatabaseTables.BLOOD_PRESSURE for blood pressure reading.
+     * @param table Table where the record will be stored: [DatabaseTables.BODY_MEASURES] for body measures, or [DatabaseTables.BLOOD_PRESSURE] for blood pressure readings.
      */
     fun insertRecord(record: DatabaseEntity, table: DatabaseTables){
         val db = this.writableDatabase
@@ -48,7 +48,7 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
     /**
      * Returns an array with all the blood pressure readings stored in the database.
-     * The readings are returned as BloodPressureReading objects.
+     * The readings are returned as [BloodPressureReading] objects.
      */
     fun getBloodPressureRecords(): Array<BloodPressureReading> {
         val db = this.readableDatabase
@@ -72,8 +72,8 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     /**
-     * Calculates the mean systolic and diastolic values of the readings stored in the DB, and returns it as a new BloodPressureReading object
-     * @return BloodPressureReading object with the mean values and the current timestamp, or null if there are no records
+     * Calculates the mean systolic and diastolic values of the readings stored in the DB, and returns it as a new [BloodPressureReading] object
+     * @return [BloodPressureReading] object with the mean values and the current timestamp, or null if there are no records
      */
     fun calculateBloodPressureMean(): BloodPressureReading? {
         val records = getBloodPressureRecords()
@@ -99,7 +99,7 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
     /**
      * Returns an array with all the body measures readings stored in the database.
-     * The readings are returned as BodyMeasureReading objects.
+     * The readings are returned as [BodyMeasuresReading] objects.
      */
     fun getBodyMeasureRecords(): Array<BodyMeasuresReading>{
         val db = this.readableDatabase
@@ -121,8 +121,8 @@ class HealthDatabase(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     /**
-     * Calculates the mean weight and height values of the readings stored in the DB, and returns it as a new BodyMeasureReading object
-     * @return BodyMeasureReading object with the mean value and the current timestamp
+     * Calculates the mean weight and height values of the readings stored in the DB, and returns it as a new [BodyMeasuresReading] object
+     * @return [BodyMeasuresReading] object with the mean value and the current timestamp
      */
     fun calculateBodyMeasureMean(): BodyMeasuresReading? {
         val records = getBodyMeasureRecords()
