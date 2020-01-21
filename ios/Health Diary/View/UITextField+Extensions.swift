@@ -53,8 +53,9 @@ extension UITextField{
 
     @objc func registerButtonAction(){
         self.resignFirstResponder() // dismisses the keyboard...
-
-        if let viewController = self.superview?.window?.rootViewController?.children.first as? MainViewController {
+        
+        let tabBarController = self.superview?.window?.rootViewController as? UITabBarController
+        if let viewController = tabBarController?.selectedViewController as? MainViewController {
             viewController.registerValues() // and registers the values
         }
         
