@@ -11,10 +11,10 @@ import com.guillermobarreiro.healthdiary.R
 
 
 /**
- * [RecyclerViewAdapter] for [BloodPressureReading] objects.
+ * [RecyclerView.Adapter] for [BloodPressureReading] objects.
  * Allows the display of the info from a [BloodPressureReading] on a cell in a list ([RecyclerView]).
  */
-class BloodPressureReadingsAdapter(private val context: Context, database: HealthDatabase): RecyclerView.Adapter<BloodPressureReadingsAdapter.RecordViewHolder>() {
+class BloodPressureReadingsAdapter(private val context: Context, val database: HealthDatabase): RecyclerView.Adapter<BloodPressureReadingsAdapter.RecordViewHolder>() {
 
     //region Date formatters
     private val dayFormatter: DateFormat = android.text.format.DateFormat.getMediumDateFormat(context)
@@ -32,7 +32,7 @@ class BloodPressureReadingsAdapter(private val context: Context, database: Healt
     //endregion
 
     //region Data source
-    private val bloodPressureRecords: Array<BloodPressureReading> = database.getBloodPressureRecords()
+    private val bloodPressureRecords: List<BloodPressureReading> = database.bloodPressureDao().getRecords()
     //endregion
 
 

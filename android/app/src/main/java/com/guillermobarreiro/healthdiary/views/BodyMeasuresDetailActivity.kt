@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.guillermobarreiro.healthdiary.R
-import com.guillermobarreiro.healthdiary.database.BloodPressureReadingsAdapter
 import com.guillermobarreiro.healthdiary.database.BodyMeasuresReadingsAdapter
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
 
@@ -26,7 +25,7 @@ class BodyMeasuresDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Sets up the DB connection
-        db = HealthDatabase(this)
+        db = HealthDatabase.getDatabase(applicationContext)
 
         // Sets up the recycler view
         recyclerView = findViewById<RecyclerView>(R.id.body_measures_recycler).apply {

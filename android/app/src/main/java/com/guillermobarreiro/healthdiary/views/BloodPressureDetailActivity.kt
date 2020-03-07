@@ -25,7 +25,7 @@ class BloodPressureDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Sets up the DB connection
-        db = HealthDatabase(this)
+        db = HealthDatabase.getDatabase(applicationContext)
 
         // Sets up the recycler view
         recyclerView = findViewById<RecyclerView>(R.id.blood_pressure_recycler).apply {

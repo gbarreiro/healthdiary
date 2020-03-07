@@ -33,7 +33,6 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
     //endregion
 
     // region Datasources
-    private var meanValues: BloodPressureReading? = null
     private lateinit var db: HealthDatabase
     //endregion
 
@@ -78,17 +77,11 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         insertedSystolic.setOnEditorActionListener(this)
 
         // Sets up the DB connection
-        db = HealthDatabase(context!!)
+        db = HealthDatabase.getDatabase(activity!!.applicationContext)
 
         // Gets the last mean values and shows them in the UI
         updateMean()
 
-    }
-
-    override fun onDestroy() {
-        // Removes the connection to the DB
-        db.close()
-        super.onDestroy()
     }
 
     //endregion
@@ -100,16 +93,15 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
      * Launched when the "Register value" button is clicked.
      */
     private fun registerPressure(){
-        val lastBloodPressure: BloodPressureReading?
-        if(randomSwitch.isChecked){
+        val newBloodPressureReading = if(randomSwitch.isChecked){
             // Inserts a random pressure reading
-            lastBloodPressure = BloodPressureReading()
+            BloodPressureReading()
 
         }else {
             // Registers the inserted weight
             val systolic = insertedSystolic.text.toString().toInt()
             val diastolic = insertedDiastolic.text.toString().toInt()
-            lastBloodPressure = BloodPressureReading(systolic, diastolic)
+            BloodPressureReading(systolic, diastolic)
 
         }
 
@@ -118,7 +110,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         insertedSystolic.text.clear()
 
         // Registers the new record in the DB
-        db.insertRecord(lastBloodPressure, HealthDatabase.DatabaseTables.BLOOD_PRESSURE)
+        db.bloodPressureDao().insertRecord(newBloodPressureReading)
 
         // Updates the mean values
         updateMean()
@@ -129,17 +121,15 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
      * Update the displayed mean values.
      */
     private fun updateMean(){
-        this.meanValues = db.calculateBloodPressureMean()
-        if(this.meanValues!=null){
-            val avgSystolic = meanValues!!.systolic.toString()
-            val avgDiastolic = meanValues!!.diastolic.toString()
-            val riskColor = riskColors[meanValues!!.riskLevel] ?: resources.getColor(android.R.color.holo_purple)
-            averageSystolic.text = avgSystolic
-            averageDiastolic.text = avgDiastolic
-            averageDiastolic.setTextColor(riskColor)
-            averageSystolic.setTextColor(riskColor)
-        }
+        val avgSystolic = db.bloodPressureDao().getAverageSystolic()
+        val avgDiastolic = db.bloodPressureDao().getAverageDiastolic()
+        val riskLevel = BloodPressureReading.riskLevel(avgSystolic, avgDiastolic)
 
+        val riskColor = riskColors[riskLevel] ?: resources.getColor(android.R.color.holo_purple)
+        averageSystolic.text = averageSystolic.toString()
+        averageDiastolic.text = averageDiastolic.toString()
+        averageDiastolic.setTextColor(riskColor)
+        averageSystolic.setTextColor(riskColor)
 
     }
 

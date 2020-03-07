@@ -31,7 +31,7 @@ class BodyMeasuresReadingsAdapter(private val context: Context, private val data
     //endregion
 
     //region Data source
-    private val bodyMeasuresRecords: Array<BodyMeasuresReading> = database.getBodyMeasureRecords()
+    private val bodyMeasuresRecords: List<BodyMeasuresReading> = database.bodyMeasuresDao().getRecords()
     //endregion
 
 
