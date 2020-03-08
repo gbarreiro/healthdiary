@@ -2,6 +2,7 @@ package com.guillermobarreiro.healthdiary.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.util.Date
 import java.util.Random
@@ -44,7 +45,7 @@ data class BloodPressureReading(
          - Systolic < 180 and Diastolic < 120: High
          - Systolic > 180 and Diastolic > 120: Hypertensive
      */
-    val riskLevel = riskLevel(this.systolic, this.diastolic)
+    @Ignore val riskLevel = riskLevel(this.systolic, this.diastolic)
 
     /**
      * Constructor for creating a pressure reading with the current date

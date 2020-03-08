@@ -126,8 +126,8 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         val riskLevel = BloodPressureReading.riskLevel(avgSystolic, avgDiastolic)
 
         val riskColor = riskColors[riskLevel] ?: resources.getColor(android.R.color.holo_purple)
-        averageSystolic.text = averageSystolic.toString()
-        averageDiastolic.text = averageDiastolic.toString()
+        averageSystolic.text = avgSystolic.toString()
+        averageDiastolic.text = avgDiastolic.toString()
         averageDiastolic.setTextColor(riskColor)
         averageSystolic.setTextColor(riskColor)
 

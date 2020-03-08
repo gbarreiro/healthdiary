@@ -132,10 +132,10 @@ class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionLis
         val avgHeight = db.bodyMeasuresDao().getAverageHeight()
         val avgBmi = BodyMeasuresReading.bmi(avgWeight, avgHeight)
 
-        val bmiColor = riskColors[avgBmi] ?: resources.getColor(android.R.color.holo_purple)
+        val bmiColor = riskColors[BodyMeasuresReading.bmiLevel(avgBmi)] ?: resources.getColor(android.R.color.holo_purple)
         averageWeight.text = "%.1f".format(avgWeight)
         averageHeight.text = avgHeight.toString()
-        averageBmi.text = "%.1f".format(avgBmi)
+        averageBmi.text = if (avgBmi.isNaN()) "–" else "%.1f".format(avgBmi)
         averageWeight.setTextColor(bmiColor)
         averageHeight.setTextColor(bmiColor)
         averageBmi.setTextColor(bmiColor)

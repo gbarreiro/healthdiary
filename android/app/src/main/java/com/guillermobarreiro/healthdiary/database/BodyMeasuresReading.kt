@@ -2,6 +2,7 @@ package com.guillermobarreiro.healthdiary.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.util.*
 import kotlin.math.pow
@@ -46,11 +47,11 @@ data class BodyMeasuresReading(
      * - 25 - 29.9: overweight
      * - 30 - 39.9: obese
      */
-    val bmi = bmi(this.weight, this.height)
+    @Ignore val bmi = bmi(this.weight, this.height)
 
     enum class BMILevel {UNDERWEIGHT, HEALTHY, OVERWEIGHT, OBESE}
 
-    val bmiLevel = bmiLevel(this.bmi)
+    @Ignore val bmiLevel = bmiLevel(this.bmi)
 
     /**
      * Constructor for creating a weight reading with the current date
