@@ -1,9 +1,0 @@
-platform :ios, '9.0'
-
-target 'Health Diary' do
-  use_frameworks!
-
-  # Pods for Health Diary
-  pod 'Charts'
-
-end

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Charts
 import CoreData
 
 /**
@@ -18,76 +17,6 @@ import CoreData
  */
 class BloodPressureDetailViewController: UITableViewController, NSFetchedResultsControllerDelegate {
         
-    // MARK: Charts
-    @IBOutlet weak var chartView: LineChartView!
-    var diastolicEntries = [ChartDataEntry]()
-    var systolicEntries = [ChartDataEntry]()
-    
-    private func addRecordToChart(record: BloodPressureReading) {
-        diastolicEntries.append(ChartDataEntry(x: Double(diastolicEntries.count+1), y: Double(record.diastolic)))
-        systolicEntries.append(ChartDataEntry(x: Double(systolicEntries.count+1), y: Double(record.systolic)))
-        chartView.notifyDataSetChanged()
-    }
-    
-    private func deleteRecordFromChart(index: Int){
-        diastolicEntries.remove(at: index)
-        systolicEntries.remove(at: index)
-        chartView.notifyDataSetChanged()
-    }
-    
-    private func initializateChart(){
-
-        
-        
-        // Fill ChartData entries
-        if let numberOfElements = fetchedResultsController.sections?.first!.numberOfObjects{
-            if numberOfElements > 0 {
-                for record in fetchedResultsController.fetchedObjects!.reversed() {
-                    addRecordToChart(record: record)
-                }
-                
-                // Create chart lines
-                let diastolicLine = LineChartDataSet(entries: diastolicEntries, label: "Diastolic")
-                let systolicLine = LineChartDataSet(entries: systolicEntries, label: "Systolic")
-                
-                // Customization for chart lines: diastolic
-                diastolicLine.colors = [UIColor.blue]
-                diastolicLine.circleColors = [UIColor.blue]
-                diastolicLine.lineWidth = 2
-                diastolicLine.drawCircleHoleEnabled = false
-                diastolicLine.drawValuesEnabled = false
-                
-                // Customization for chart lines: systolic
-                systolicLine.colors = [UIColor.red]
-                systolicLine.circleColors = [UIColor.red]
-                systolicLine.lineWidth = 2
-                systolicLine.drawCircleHoleEnabled = false
-                systolicLine.drawValuesEnabled = false
-
-                // Links the lines to the chart
-                let chartData = LineChartData()
-                chartData.addDataSet(diastolicLine)
-                chartData.addDataSet(systolicLine)
-                chartView.data = chartData
-            }
-        }
-        // Customize the chart
-        chartView.noDataText = "No records"
-        chartView.setScaleEnabled(true)
-        chartView.xAxis.enabled = false
-        chartView.animate(xAxisDuration: 1.5, yAxisDuration: 0.0)
-        chartView.doubleTapToZoomEnabled = false
-        chartView.highlightPerTapEnabled = false
-        chartView.highlightPerDragEnabled = false
-        chartView.dragEnabled = true
-        chartView.pinchZoomEnabled = false
-        chartView.setVisibleXRange(minXRange: 5, maxXRange: 5)
-        chartView.moveViewToX(Double(diastolicEntries.count))
-
-        
-        
-    }
-    
     // MARK: Data sources
     private var fetchedResultsController: NSFetchedResultsController<BloodPressureReading>!
     
@@ -121,8 +50,6 @@ class BloodPressureDetailViewController: UITableViewController, NSFetchedResults
         
         // Set up FetchedResultsController
         setupFetchedResultsController()
-        
-        initializateChart()
         
     }
     
@@ -182,12 +109,12 @@ class BloodPressureDetailViewController: UITableViewController, NSFetchedResults
         // A reading has been added or removed
         switch type {
         case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade) // updates table
-            addRecordToChart(record: fetchedResultsController.object(at: newIndexPath!)) // updates chart
+            // Updates table
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
             break
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade) // updates table
-            deleteRecordFromChart(index: indexPath!.row) // updates chart
+            // Updates table
+            tableView.deleteRows(at: [indexPath!], with: .fade)
             break
         default:
             // Do nothing, not allowed ops

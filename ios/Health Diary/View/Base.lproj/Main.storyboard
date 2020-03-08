@@ -183,14 +183,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="uhB-Jd-gj4" customClass="LineChartView" customModule="Charts">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="bloodPressureCell" rowHeight="69" id="UTg-qK-3tH" userLabel="Blood Pressure Cell" customClass="BloodPressureRecordCell" customModule="Health_Diary" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="325" width="414" height="69"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UTg-qK-3tH" id="ylU-EB-KZp">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
@@ -285,9 +280,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="chartView" destination="uhB-Jd-gj4" id="lGb-vQ-xWr"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvN-LT-1cY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
