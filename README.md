@@ -20,3 +20,6 @@ The app structure has two screens for each type of measure:
 - Companion app for watchOS / Android Wear
 
 Ideas specific for only one platform are detailed in their corresponding READMEs
+
+## Author:
+Guillermo Barreiro <https://github.com/gbarreiro>
