@@ -1,10 +1,15 @@
-package com.guillermobarreiro.healthdiary.database
+package com.guillermobarreiro.healthdiary.database.entities
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
+/**
+ * DAO (data access object) for the [BodyMeasuresReading].
+ * Allows inserting, deleting and retrieving the body measures records, as well as get the mean values.
+ * This DAO wraps the SQL queries into public methods.
+ */
 @Dao
 interface BodyMeasuresDao {
 

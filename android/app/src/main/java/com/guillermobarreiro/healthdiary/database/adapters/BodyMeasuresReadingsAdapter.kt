@@ -1,4 +1,4 @@
-package com.guillermobarreiro.healthdiary.database
+package com.guillermobarreiro.healthdiary.database.adapters
 
 import android.content.Context
 import java.text.DateFormat
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.guillermobarreiro.healthdiary.R
+import com.guillermobarreiro.healthdiary.database.HealthDatabase
+import com.guillermobarreiro.healthdiary.database.entities.BodyMeasuresReading
 
 /**
  * RecyclerViewAdapter for BodyMeasuresReading objects.
@@ -31,7 +33,7 @@ class BodyMeasuresReadingsAdapter(private val context: Context, private val data
     //endregion
 
     //region Data source
-    private val bodyMeasuresRecords: List<BodyMeasuresReading> = database.bodyMeasuresDao().getRecords()
+    private val bodyMeasuresRecords: List<BodyMeasuresReading> = database.bodyMeasuresDao().getRecords() // get the list of records from the DAO
     //endregion
 
 
@@ -54,7 +56,9 @@ class BodyMeasuresReadingsAdapter(private val context: Context, private val data
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
         // create a new cell
         val cellView = LayoutInflater.from(parent.context).inflate(R.layout.cell_body_measures_reading, parent, false)
-        return RecordViewHolder(cellView)
+        return RecordViewHolder(
+            cellView
+        )
     }
 
     // Replace the contents of a view (invoked by the layout manager)

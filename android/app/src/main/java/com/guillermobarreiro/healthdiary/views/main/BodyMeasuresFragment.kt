@@ -1,4 +1,4 @@
-package com.guillermobarreiro.healthdiary.views
+package com.guillermobarreiro.healthdiary.views.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +14,8 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.guillermobarreiro.healthdiary.R
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
-import com.guillermobarreiro.healthdiary.database.BodyMeasuresReading
+import com.guillermobarreiro.healthdiary.database.entities.BodyMeasuresReading
+import com.guillermobarreiro.healthdiary.views.detail.BodyMeasuresDetailActivity
 
 /**
  * Fragment for registering new body measures readings and see the average values.
@@ -101,7 +102,10 @@ class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionLis
             // Registers the inserted weight
             val myWeight = insertedWeight.text.toString().toFloat()
             val myHeight = insertedHeight.text.toString().toInt()
-            BodyMeasuresReading(myWeight, myHeight)
+            BodyMeasuresReading(
+                myWeight,
+                myHeight
+            )
         }
 
         // Clears the input
@@ -128,10 +132,12 @@ class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionLis
      * Update the displayed mean values.
      */
     private fun updateMean(){
+        // Get the mean values from the DB
         val avgWeight = db.bodyMeasuresDao().getAverageWeight()
         val avgHeight = db.bodyMeasuresDao().getAverageHeight()
         val avgBmi = BodyMeasuresReading.bmi(avgWeight, avgHeight)
 
+        // Update the UI with the new values
         val bmiColor = riskColors[BodyMeasuresReading.bmiLevel(avgBmi)] ?: resources.getColor(android.R.color.holo_purple)
         averageWeight.text = "%.1f".format(avgWeight)
         averageHeight.text = avgHeight.toString()

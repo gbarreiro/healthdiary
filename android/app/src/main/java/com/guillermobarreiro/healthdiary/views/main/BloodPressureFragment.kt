@@ -1,4 +1,4 @@
-package com.guillermobarreiro.healthdiary.views
+package com.guillermobarreiro.healthdiary.views.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,8 +13,9 @@ import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.guillermobarreiro.healthdiary.R
-import com.guillermobarreiro.healthdiary.database.BloodPressureReading
+import com.guillermobarreiro.healthdiary.database.entities.BloodPressureReading
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
+import com.guillermobarreiro.healthdiary.views.detail.BloodPressureDetailActivity
 
 /**
  * Fragment for registering new blood pressure readings and see the average values.
@@ -101,7 +102,10 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
             // Registers the inserted weight
             val systolic = insertedSystolic.text.toString().toInt()
             val diastolic = insertedDiastolic.text.toString().toInt()
-            BloodPressureReading(systolic, diastolic)
+            BloodPressureReading(
+                systolic,
+                diastolic
+            )
 
         }
 
@@ -121,10 +125,12 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
      * Update the displayed mean values.
      */
     private fun updateMean(){
+        // Get the mean values from the DB
         val avgSystolic = db.bloodPressureDao().getAverageSystolic()
         val avgDiastolic = db.bloodPressureDao().getAverageDiastolic()
         val riskLevel = BloodPressureReading.riskLevel(avgSystolic, avgDiastolic)
 
+        // Update the UI with the new values
         val riskColor = riskColors[riskLevel] ?: resources.getColor(android.R.color.holo_purple)
         averageSystolic.text = avgSystolic.toString()
         averageDiastolic.text = avgDiastolic.toString()

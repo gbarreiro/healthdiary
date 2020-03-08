@@ -1,25 +1,25 @@
-package com.guillermobarreiro.healthdiary.views
+package com.guillermobarreiro.healthdiary.views.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.guillermobarreiro.healthdiary.R
-import com.guillermobarreiro.healthdiary.database.BloodPressureReadingsAdapter
+import com.guillermobarreiro.healthdiary.database.adapters.BodyMeasuresReadingsAdapter
 import com.guillermobarreiro.healthdiary.database.HealthDatabase
 
 /**
- * Detail activity for displaying all the stored blood pressure records.
- * The records are displayed in a RecyclerView using the [BloodPressureReadingsAdapter].
+ * Detail activity for displaying all the stored body measures records.
+ * The records are displayed in a [RecyclerView] using the [BodyMeasuresReadingsAdapter].
  */
-class BloodPressureDetailActivity : AppCompatActivity() {
+class BodyMeasuresDetailActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var db: HealthDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_blood_pressure_detail)
+        setContentView(R.layout.activity_body_measures_detail)
 
         // Shows up button in the toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -28,10 +28,14 @@ class BloodPressureDetailActivity : AppCompatActivity() {
         db = HealthDatabase.getDatabase(applicationContext)
 
         // Sets up the recycler view
-        recyclerView = findViewById<RecyclerView>(R.id.blood_pressure_recycler).apply {
+        recyclerView = findViewById<RecyclerView>(R.id.body_measures_recycler).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(baseContext)
-            adapter = BloodPressureReadingsAdapter(baseContext, db)
+            adapter =
+                BodyMeasuresReadingsAdapter(
+                    baseContext,
+                    db
+                )
         }
     }
 

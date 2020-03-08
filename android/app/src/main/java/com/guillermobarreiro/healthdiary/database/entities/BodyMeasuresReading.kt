@@ -1,4 +1,4 @@
-package com.guillermobarreiro.healthdiary.database
+package com.guillermobarreiro.healthdiary.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -10,6 +10,8 @@ import kotlin.math.pow
 /**
  * Represents a body measure reading, this means, the sampling of the user's weight and height in a specific moment.
  * The weight is stored as a decimal number in kg, and the height as an integer in cm.
+ *
+ * This class is an Android Room [Entity]. CRUD operations are done through its DAO [BodyMeasuresDao].
  */
 
 @Entity
@@ -27,7 +29,7 @@ data class BodyMeasuresReading(
             return weight / (height.toFloat()/100).pow(2).toDouble()
         }
 
-        fun bmiLevel(bmi: Double): BMILevel{
+        fun bmiLevel(bmi: Double): BMILevel {
             return when {
                 bmi < 18.5 -> BMILevel.UNDERWEIGHT
                 bmi < 24.9 -> BMILevel.HEALTHY
@@ -47,11 +49,18 @@ data class BodyMeasuresReading(
      * - 25 - 29.9: overweight
      * - 30 - 39.9: obese
      */
-    @Ignore val bmi = bmi(this.weight, this.height)
+    @Ignore val bmi =
+        bmi(
+            this.weight,
+            this.height
+        )
 
     enum class BMILevel {UNDERWEIGHT, HEALTHY, OVERWEIGHT, OBESE}
 
-    @Ignore val bmiLevel = bmiLevel(this.bmi)
+    @Ignore val bmiLevel =
+        bmiLevel(
+            this.bmi
+        )
 
     /**
      * Constructor for creating a weight reading with the current date

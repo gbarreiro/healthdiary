@@ -1,4 +1,4 @@
-package com.guillermobarreiro.healthdiary.database
+package com.guillermobarreiro.healthdiary.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -13,6 +13,8 @@ import java.util.Random
  *
  * Both systolic and diastolic values are stored as Integer values, expressed in mmHg.
  *
+ * This class is an Android Room [Entity]. CRUD operations are done through its DAO [BloodPressureDao].
+ *
  */
 @Entity
 data class BloodPressureReading(
@@ -24,7 +26,7 @@ data class BloodPressureReading(
 
     companion object {
         val randomGenerator = Random() // needed for creating random gaussian values
-        fun riskLevel(systolic: Int, diastolic: Int): RiskLevel{
+        fun riskLevel(systolic: Int, diastolic: Int): RiskLevel {
             return when {
                 systolic < 120 && diastolic < 80 -> RiskLevel.NORMAL
                 systolic < 129  && diastolic < 80 -> RiskLevel.ELEVATED
@@ -45,7 +47,11 @@ data class BloodPressureReading(
          - Systolic < 180 and Diastolic < 120: High
          - Systolic > 180 and Diastolic > 120: Hypertensive
      */
-    @Ignore val riskLevel = riskLevel(this.systolic, this.diastolic)
+    @Ignore val riskLevel =
+        riskLevel(
+            this.systolic,
+            this.diastolic
+        )
 
     /**
      * Constructor for creating a pressure reading with the current date

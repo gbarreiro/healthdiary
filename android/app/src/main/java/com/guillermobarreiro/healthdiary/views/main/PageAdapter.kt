@@ -1,4 +1,4 @@
-package com.guillermobarreiro.healthdiary.views
+package com.guillermobarreiro.healthdiary.views.main
 
 import android.content.Context
 import androidx.fragment.app.Fragment
@@ -15,8 +15,12 @@ class PageAdapter(fm: FragmentManager, val context: Context): FragmentPagerAdapt
     override fun getItem(position: Int): Fragment {
         // Returns the desired fragment for each tab
         return when (position){
-            0 -> {BloodPressureFragment()}
-            1 -> {BodyMeasuresFragment()}
+            0 -> {
+                BloodPressureFragment()
+            }
+            1 -> {
+                BodyMeasuresFragment()
+            }
             else -> Fragment()
         }
     }

@@ -1,4 +1,4 @@
-package com.guillermobarreiro.healthdiary.views
+package com.guillermobarreiro.healthdiary.views.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +23,11 @@ class MainActivity : AppCompatActivity() {
         viewPagerMain = findViewById(R.id.pager_main)
 
         // Configures the tabs
-        val fragmentAdapter = PageAdapter(supportFragmentManager, baseContext)
+        val fragmentAdapter =
+            PageAdapter(
+                supportFragmentManager,
+                baseContext
+            )
         viewPagerMain.adapter = fragmentAdapter
         tabsMain.setupWithViewPager(viewPagerMain)
     }
