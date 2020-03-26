@@ -80,6 +80,11 @@ class BodyMeasuresMainViewController: UIViewController, MainViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Release keyboard when the user taps wherever
+    self.view.endEditing(true)
+    }
+    
     // Avoids the typing of non-digit characters in the input text fields and of too big numbers
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
