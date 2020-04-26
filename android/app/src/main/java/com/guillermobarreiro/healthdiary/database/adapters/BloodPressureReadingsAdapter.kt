@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.guillermobarreiro.healthdiary.R
-import com.guillermobarreiro.healthdiary.database.HealthDatabase
 import com.guillermobarreiro.healthdiary.database.entities.BloodPressureReading
 
 
@@ -16,7 +15,7 @@ import com.guillermobarreiro.healthdiary.database.entities.BloodPressureReading
  * [RecyclerView.Adapter] for [BloodPressureReading] objects.
  * Allows the display of the info from a [BloodPressureReading] on a cell in a list ([RecyclerView]).
  */
-class BloodPressureReadingsAdapter(private val context: Context, val database: HealthDatabase): RecyclerView.Adapter<BloodPressureReadingsAdapter.RecordViewHolder>() {
+class BloodPressureReadingsAdapter(private val context: Context): RecyclerView.Adapter<BloodPressureReadingsAdapter.RecordViewHolder>() {
 
     //region Date formatters
     private val dayFormatter: DateFormat = android.text.format.DateFormat.getMediumDateFormat(context)
@@ -34,7 +33,17 @@ class BloodPressureReadingsAdapter(private val context: Context, val database: H
     //endregion
 
     //region Data source
-    private val bloodPressureRecords: List<BloodPressureReading> = database.bloodPressureDao().getRecords() // get the list of records from the DAO
+    private lateinit var bloodPressureRecords: List<BloodPressureReading>
+
+    /**
+     * Update the data source and refresh the list.
+     * This method is called by the responsible ViewModel observer.
+     */
+    fun setDataSource(readings: List<BloodPressureReading>){
+        this.bloodPressureRecords = readings
+        notifyDataSetChanged()
+    }
+
     //endregion
 
 

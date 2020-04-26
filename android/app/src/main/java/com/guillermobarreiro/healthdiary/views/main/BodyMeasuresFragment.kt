@@ -1,5 +1,6 @@
 package com.guillermobarreiro.healthdiary.views.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -12,13 +13,17 @@ import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.guillermobarreiro.healthdiary.R
-import com.guillermobarreiro.healthdiary.database.HealthDatabase
+import com.guillermobarreiro.healthdiary.database.entities.AverageBodyMeasures
 import com.guillermobarreiro.healthdiary.database.entities.BodyMeasuresReading
+import com.guillermobarreiro.healthdiary.database.viewmodels.BodyMeasuresViewModel
 import com.guillermobarreiro.healthdiary.views.detail.BodyMeasuresDetailActivity
 
 /**
  * Fragment for registering new body measures readings and see the average values.
+ * The data is held in a [BodyMeasuresViewModel]
  * This fragment is embedded into the [MainActivity].
  */
 class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener{
@@ -35,7 +40,7 @@ class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionLis
     //endregion
 
     //region Datasources
-    private lateinit var db: HealthDatabase
+    private val viewModel: BodyMeasuresViewModel by viewModels()
     //endregion
 
     private val riskColors = mutableMapOf<BodyMeasuresReading.BMILevel, Int>()
@@ -78,11 +83,11 @@ class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionLis
         insertedWeight.addTextChangedListener(this)
         insertedWeight.setOnEditorActionListener(this)
 
-        // Sets up the DB connection
-        db = HealthDatabase.getDatabase(activity!!.applicationContext)
-
-        // Gets the last mean values and shows them in the UI
-        updateMean()
+        // Sets up the observer for the ViewModel data
+        viewModel.averageWeightHeight.observe(viewLifecycleOwner, Observer<AverageBodyMeasures> { avgValues ->
+            // Update the weight and height mean
+            this.updateMean(avgValues.weight, avgValues.height)
+        })
 
     }
 
@@ -91,7 +96,7 @@ class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionLis
     //region Data reading and writing
 
     /**
-     * Register the weight and height of the user into the DB, and update the mean values.
+     * Register the weight and height of the user into the DB.
      * Launched when the "Register value" button is clicked.
      */
     private fun registerBodyMeasures(){
@@ -113,28 +118,25 @@ class BodyMeasuresFragment : Fragment(), TextWatcher, TextView.OnEditorActionLis
         insertedHeight.text.clear()
 
         // Compares the record with the mean
-        val avgWeight = db.bodyMeasuresDao().getAverageWeight()
-        val weightComparison = if(newBodyMeasures.weight > avgWeight) R.string.weight_higher else R.string.weight_lower
+        val avgWeight = viewModel.averageWeightHeight.value?.weight
+        val weightComparison = if(newBodyMeasures.weight > avgWeight!!) R.string.weight_higher else R.string.weight_lower
 
         // Notifies the user about the comparison of the introduced weight with the average
         Toast.makeText(context, weightComparison, Toast.LENGTH_LONG).show()
 
         // Registers the new record in the DB
-        db.bodyMeasuresDao().insertRecord(newBodyMeasures)
+        viewModel.insertRecord(newBodyMeasures)
 
-        // Updates the mean values
-        updateMean()
-
+        // The mean will be automatically updated by the ViewModel
 
     }
 
     /**
      * Update the displayed mean values.
+     * This method is automatically called by the ViewModel observer.
      */
-    private fun updateMean(){
-        // Get the mean values from the DB
-        val avgWeight = db.bodyMeasuresDao().getAverageWeight()
-        val avgHeight = db.bodyMeasuresDao().getAverageHeight()
+    @SuppressLint("SetTextI18n")
+    private fun updateMean(avgWeight: Float, avgHeight: Int){
         val avgBmi = BodyMeasuresReading.bmi(avgWeight, avgHeight)
 
         // Update the UI with the new values

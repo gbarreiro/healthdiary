@@ -1,5 +1,6 @@
 package com.guillermobarreiro.healthdiary.database.entities
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -20,12 +21,9 @@ interface BloodPressureDao {
     fun deleteRecord(record: BloodPressureReading)
 
     @Query("SELECT * FROM bloodpressurereading ORDER BY timestamp DESC")
-    fun getRecords(): List<BloodPressureReading>
+    fun getRecords(): LiveData<List<BloodPressureReading>>
 
-    @Query("SELECT avg(systolic) FROM bloodpressurereading")
-    fun getAverageSystolic(): Int
-
-    @Query("SELECT avg(diastolic) FROM bloodpressurereading")
-    fun getAverageDiastolic(): Int
+    @Query("SELECT avg(systolic) as systolic, avg(diastolic) as diastolic FROM bloodpressurereading")
+    fun getAverageSystolicDiastolic(): LiveData<AverageBloodPressure>
 
 }

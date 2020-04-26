@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.guillermobarreiro.healthdiary.R
-import com.guillermobarreiro.healthdiary.database.HealthDatabase
 import com.guillermobarreiro.healthdiary.database.entities.BodyMeasuresReading
 
 /**
  * RecyclerViewAdapter for BodyMeasuresReading objects.
  * Allows the display of the info from a BodyMeasuresReading on a cell in a list (RecyclerView).
  */
-class BodyMeasuresReadingsAdapter(private val context: Context, private val database: HealthDatabase): RecyclerView.Adapter<BodyMeasuresReadingsAdapter.RecordViewHolder>() {
+class BodyMeasuresReadingsAdapter(private val context: Context): RecyclerView.Adapter<BodyMeasuresReadingsAdapter.RecordViewHolder>() {
 
     //region Date formatters
     private val dayFormatter: DateFormat = android.text.format.DateFormat.getMediumDateFormat(context)
@@ -33,7 +32,17 @@ class BodyMeasuresReadingsAdapter(private val context: Context, private val data
     //endregion
 
     //region Data source
-    private val bodyMeasuresRecords: List<BodyMeasuresReading> = database.bodyMeasuresDao().getRecords() // get the list of records from the DAO
+    private lateinit var bodyMeasuresRecords: List<BodyMeasuresReading>
+
+    /**
+     * Update the data source and refresh the list.
+     * This method is called by the responsible ViewModel observer.
+     */
+    fun setDataSource(readings: List<BodyMeasuresReading>){
+        this.bodyMeasuresRecords = readings
+        notifyDataSetChanged()
+    }
+
     //endregion
 
 

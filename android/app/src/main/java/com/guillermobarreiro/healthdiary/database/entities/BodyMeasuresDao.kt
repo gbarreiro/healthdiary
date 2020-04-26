@@ -1,5 +1,6 @@
 package com.guillermobarreiro.healthdiary.database.entities
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -20,12 +21,9 @@ interface BodyMeasuresDao {
     fun deleteRecord(record: BodyMeasuresReading)
 
     @Query("SELECT * FROM bodymeasuresreading ORDER BY timestamp DESC")
-    fun getRecords(): List<BodyMeasuresReading>
+    fun getRecords(): LiveData<List<BodyMeasuresReading>>
 
-    @Query("SELECT avg(weight) FROM bodymeasuresreading")
-    fun getAverageWeight(): Float
-
-    @Query("SELECT avg(height) FROM bodymeasuresreading")
-    fun getAverageHeight(): Int
+    @Query("SELECT avg(weight) as weight, avg(height) as height FROM bodymeasuresreading")
+    fun getAverageWeightHeight(): LiveData<AverageBodyMeasures>
 
 }

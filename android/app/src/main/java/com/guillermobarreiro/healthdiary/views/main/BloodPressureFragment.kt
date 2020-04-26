@@ -9,16 +9,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Switch
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.guillermobarreiro.healthdiary.R
+import com.guillermobarreiro.healthdiary.database.entities.AverageBloodPressure
 import com.guillermobarreiro.healthdiary.database.entities.BloodPressureReading
-import com.guillermobarreiro.healthdiary.database.HealthDatabase
+import com.guillermobarreiro.healthdiary.database.viewmodels.BloodPressureViewModel
+import com.guillermobarreiro.healthdiary.database.viewmodels.BodyMeasuresViewModel
 import com.guillermobarreiro.healthdiary.views.detail.BloodPressureDetailActivity
 
 /**
  * Fragment for registering new blood pressure readings and see the average values.
+ * The data is held in a [BodyMeasuresViewModel]
  * This fragment is embedded into the [MainActivity].
  */
 class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionListener {
@@ -34,7 +42,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
     //endregion
 
     // region Datasources
-    private lateinit var db: HealthDatabase
+    private val viewModel: BloodPressureViewModel by viewModels()
     //endregion
 
     private val riskColors = mutableMapOf<BloodPressureReading.RiskLevel, Int>()
@@ -77,11 +85,11 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         insertedSystolic.addTextChangedListener(this)
         insertedSystolic.setOnEditorActionListener(this)
 
-        // Sets up the DB connection
-        db = HealthDatabase.getDatabase(activity!!.applicationContext)
-
-        // Gets the last mean values and shows them in the UI
-        updateMean()
+        // Sets up the observer for the ViewModel data
+        viewModel.averageSystolicDiastolic.observe(viewLifecycleOwner, Observer<AverageBloodPressure>{ avgValues ->
+            // Update the systolic and diastolic mean
+            this.updateMean(avgValues.systolic, avgValues.diastolic)
+        })
 
     }
 
@@ -90,7 +98,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
     //region Data reading and writing
 
     /**
-     * Register the blood pressure of the user into the DB, and update the mean values.
+     * Register the blood pressure of the user into the DB.
      * Launched when the "Register value" button is clicked.
      */
     private fun registerPressure(){
@@ -114,20 +122,17 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
         insertedSystolic.text.clear()
 
         // Registers the new record in the DB
-        db.bloodPressureDao().insertRecord(newBloodPressureReading)
+        viewModel.insertRecord(newBloodPressureReading)
 
-        // Updates the mean values
-        updateMean()
+        // The mean will be automatically updated by the ViewModel
 
     }
 
     /**
      * Update the displayed mean values.
+     * This method is automatically called by the ViewModel observer.
      */
-    private fun updateMean(){
-        // Get the mean values from the DB
-        val avgSystolic = db.bloodPressureDao().getAverageSystolic()
-        val avgDiastolic = db.bloodPressureDao().getAverageDiastolic()
+    private fun updateMean(avgSystolic: Int, avgDiastolic: Int){
         val riskLevel = BloodPressureReading.riskLevel(avgSystolic, avgDiastolic)
 
         // Update the UI with the new values
@@ -140,7 +145,7 @@ class BloodPressureFragment : Fragment(), TextWatcher, TextView.OnEditorActionLi
     }
 
     /**
-     * Open a BodyMeasuresDetailActivity for showing a list with all the records.
+     * Open a [.views.detail.BodyMeasuresDetailActivity] for showing a list with all the records.
      */
     private fun showRecords(){
         val intent = Intent(context, BloodPressureDetailActivity::class.java)
