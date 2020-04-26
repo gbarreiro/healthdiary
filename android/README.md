@@ -20,5 +20,6 @@ Each screen of the app is implemented through a Fragment or Activity, with their
 
 The BloodPressureFragment and BodyMeasureFragment are shown as tabs inside the MainActivity, using a PageAdapter and a TabLayout.
 
-## Android specific ideas for further implementation:
-- Use a ViewModel
+## Data binding
+
+ViewModel is used as a data holder between the UI and the database. This allows an easy observation of data changes, and a better architecture.
